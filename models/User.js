@@ -3,10 +3,6 @@ const Schema = mongoose.Schema;
 
 // Create Schema
 const UserSchema = new Schema({
-  name: {
-    type: String,
-    required: true
-  },
   email: {
     type: String,
     required: true
@@ -15,6 +11,32 @@ const UserSchema = new Schema({
     type: String,
     required: true
   },
+  firstName: {
+    type: String,
+    required: true
+  },
+  lastName: {
+    type: String,
+    required: true
+  },
+  middleName: String,
+  maidenName: String,
+  nickName: String,
+  accountStatus: String,
+  timezone: String,
+  curriculum: [String],
+  lastAssigned: Date,
+  queueNum: Number,
+  studentsWanted: Number,
+  studentsAssigned: Number,
+  PTorFTstudents: [String],
+  EarlyStudentsOnly: Boolean,
+  tutorLevel: String,
+  Unis4InPerson: [String],
+  nativeEnglish: Boolean,
+  languages: [String],
+  timesAvailable: [String],
+  daysAvailable: [String],
   date: {
     type: Date,
     default: Date.now
