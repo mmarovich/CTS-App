@@ -3,6 +3,7 @@ const router = express.Router();
 
 const userController = require("../../controllers/userController");
 
+
 // @route POST api/users/register
 router.route("/register")
   .post(userController.create);

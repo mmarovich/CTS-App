@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Mern Auth Example",
   "main": "server.js",
+  "proxy": "http://0.0.0.0:3001",
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
     "start:prod": "node server.js",
@@ -22,6 +23,7 @@
     "dotenv": "^8.1.0",
     "express": "^4.16.4",
     "faker": "^4.1.0",
+    "if-env": "^1.0.4",
     "is-empty": "^1.2.0",
     "jsonwebtoken": "^8.3.0",
     "moment": "^2.24.0",
