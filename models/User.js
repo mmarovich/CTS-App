@@ -30,7 +30,7 @@ const UserSchema = new Schema({
   studentsWanted: Number,
   studentsAssigned: Number,
   PTorFTstudents: [String],
-  EarlyStudentsOnly: Boolean,
+  earlyStudentsOnly: Boolean,
   tutorLevel: String,
   Unis4InPerson: [String],
   nativeEnglish: Boolean,

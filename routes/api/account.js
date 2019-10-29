@@ -9,4 +9,19 @@ router.route("/name")
 router.route("/timezone")
   .put(accountController.updateTimezone)
 
+router.route("/curriculum")
+  .put(accountController.updateCurriculum)
+
+router.route("/PTorFT")
+  .put(accountController.updatePTorFT)
+
+router.route("/earlyStudents")
+  .put(accountController.updateEarly)
+
+router.route("/nativeEnglish")
+  .put(accountController.updateNativeEnglish)
+
+router.route("/languages")
+  .put(accountController.updateLanguages)
+
 module.exports = router;

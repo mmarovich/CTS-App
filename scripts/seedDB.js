@@ -159,7 +159,7 @@ for (var i = 0; i < 100; i++) {
     studentsWanted: studentsWanted,
     studentsAssigned: studentsAssigned,
     PTorFTstudents: randomizeFTPT(),
-    EarlyStudentsOnly: randomizeEarly(),
+    earlyStudentsOnly: randomizeEarly(),
     tutorLevel: ["tutor", "senior tutor"][Math.round(Math.random())],
     Unis4InPerson: [],
     nativeEnglish: randomizeNative(),
