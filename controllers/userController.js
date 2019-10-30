@@ -10,24 +10,29 @@ const db = require("../models");
 
 module.exports = {
   create: function (req, res) {
+    console.log(req.body)
     // Form validation
 
     const { errors, isValid } = validateRegisterInput(req.body);
-
+  
     // Check validation
     if (!isValid) {
       return res.status(400).json(errors);
     }
 
     db.User.findOne({ email: req.body.email }).then(user => {
+      const { email, firstName, 
+        lastName, password } = req.body;
+      
       if (user) {
         return res.status(400).json({ email: "Email already exists" });
       } else {
+        
         const newUser = new User({
-          name: req.body.name,
-          email: req.body.email,
-          password: req.body.password
+          email, firstName, lastName, password,
         });
+
+        console.log(newUser)
 
         // Hash password before saving in database
         bcrypt.genSalt(10, (err, salt) => {
@@ -50,6 +55,7 @@ module.exports = {
 
     // Check validation
     if (!isValid) {
+      console.log("hello")
       return res.status(400).json(errors);
     }
 
@@ -68,9 +74,12 @@ module.exports = {
         if (isMatch) {
           // User matched
           // Create JWT Payload
+          console.log(user.accountStatus)
           const payload = {
             id: user.id,
-            name: user.name
+            email: user.email,
+            firstName: user.firstName,
+            accountStatus: user.accountStatus
           };
 
           // Sign token

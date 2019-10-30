@@ -19,24 +19,78 @@ const UserSchema = new Schema({
     type: String,
     required: true
   },
-  middleName: String,
-  maidenName: String,
-  nickName: String,
-  accountStatus: String,
-  timezone: String,
-  curriculum: [String],
-  lastAssigned: Date,
-  queueNum: Number,
-  studentsWanted: Number,
-  studentsAssigned: Number,
-  PTorFTstudents: [String],
-  earlyStudentsOnly: Boolean,
-  tutorLevel: String,
-  Unis4InPerson: [String],
-  nativeEnglish: Boolean,
-  languages: [String],
-  timesAvailable: [String],
-  daysAvailable: [String],
+  middleName: {
+    type: String,
+    default: ""
+  },
+  maidenName: {
+    type: String,
+    default: ""
+  },
+  nickName: {
+    type: String,
+    default: ""
+  },
+  accountStatus: {
+    type: String,
+    default: "inactive"
+  },
+  timezone: {
+    type: String,
+    default: ""
+  },
+  curriculum: {
+    type: [String],
+    default: []
+  },
+  lastAssigned: {
+    type: Date,
+    default: null
+  },
+  queueNum: {
+    type: Number,
+    default: null
+  },
+  studentsWanted: {
+    type: Number,
+    default: 0
+  },
+  studentsAssigned: {
+    type: Number,
+    default: 0
+  },
+  PTorFTstudents: {
+    type: [String],
+    default: ["PT", "FT"]
+  },
+  earlyStudentsOnly: {
+    type: Boolean,
+    default: false
+  },
+  tutorLevel: {
+    type: String,
+    default: "tutor"
+  },
+  Unis4InPerson: {
+    type: [String],
+    default: []
+  },
+  nativeEnglish: {
+    type: Boolean,
+    default: true
+  },
+  languages: {
+    type: [String],
+    default: []
+  },
+  timesAvailable: {
+    type: [String],
+    default: []
+  },
+  daysAvailable: {
+    type: [String],
+    default: []
+  },
   date: {
     type: Date,
     default: Date.now
