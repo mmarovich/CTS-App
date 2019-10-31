@@ -67,7 +67,7 @@ const UserSchema = new Schema({
     type: Boolean,
     default: false
   },
-  tutorLevel: {
+  level: {
     type: String,
     default: "tutor"
   },

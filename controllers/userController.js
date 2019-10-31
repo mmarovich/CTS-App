@@ -79,7 +79,8 @@ module.exports = {
             id: user.id,
             email: user.email,
             firstName: user.firstName,
-            accountStatus: user.accountStatus
+            accountStatus: user.accountStatus,
+            level: user.level
           };
 
           // Sign token

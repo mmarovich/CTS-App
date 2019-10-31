@@ -19,11 +19,11 @@ module.exports = {
     )
   },
   updateLevel: function (req, res) {
-    const { email, tutorLevel } = req.body;
+    const { email, level } = req.body;
 
     db.User.findOneAndUpdate(
       { email: email },
-      { $set: { tutorLevel } },
+      { $set: { level } },
       { new: true },
       (err, user) => {
         if (err) {
@@ -31,7 +31,7 @@ module.exports = {
         }
 
         console.log(user)
-        res.status(400).json({ msg: `Tutor is now a ${user.tutorLevel} level tutor!` })
+        res.status(400).json({ msg: `Tutor is now a ${user.level} level tutor!` })
       }
     )
   }

@@ -9,7 +9,7 @@ router.route("/tutors")
 router.route("/tutorStatus")
   .put(statusController.updateStatus);
 
-router.route("/tutorLevel")
+router.route("/level")
   .put(statusController.updateLevel);
 
 router.route("/assignTutor")
