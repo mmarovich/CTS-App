@@ -1,14 +1,15 @@
-import React, { Component } from "react";
+import React from "react";
 
-class Main extends Component {
+import TutorList from './main-tools/TutorList';
 
-  render() {
-    return(
-      <div>
-        <h5>Main</h5>
-      </div>
-    )
-  }
+const Main = (props) => {
+
+  console.log(props.tutors)
+  return (
+    <div>
+      <TutorList tutors={props.tutors} />
+    </div>
+  )
 }
 
 export default Main;

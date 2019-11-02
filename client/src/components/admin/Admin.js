@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React, {useState, useEffect} from 'react';
+import axios from 'axios';
 
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
@@ -61,7 +62,19 @@ const useStyles = makeStyles(theme => ({
 
 export default function Admin() {
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = useState(0);
+
+  const [tutors, setTutors] = useState();
+
+  useEffect(() => {
+    axios.get("/api/admin/tutors").then(allTutors => {
+      setTutors(allTutors.data.tutors)
+    }).catch(err => {
+      console.log(err)
+    })
+  }, [])
+
+  // useEffect(() => console.log(tutors), [tutors])
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -84,7 +97,7 @@ export default function Admin() {
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-        <Main />
+        <Main tutors={tutors} />
       </TabPanel>
       <TabPanel value={value} index={1}>
         <OnHold />
