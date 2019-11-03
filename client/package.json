@@ -6,13 +6,18 @@
   "dependencies": {
     "@material-ui/core": "^4.5.2",
     "axios": "^0.18.0",
+    "bootstrap": "^4.3.1",
     "classnames": "^2.2.6",
     "jwt-decode": "^2.2.0",
+    "moment": "^2.24.0",
+    "moment-timezone": "^0.5.27",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "react-redux": "^5.1.1",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.1",
+    "react-tooltip": "^3.11.1",
+    "reactstrap": "^8.1.1",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0"
   },
