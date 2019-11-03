@@ -67,14 +67,17 @@ export default function Admin() {
   const [tutors, setTutors] = useState();
 
   useEffect(() => {
+    updateTutors()
+  }, [])
+
+  const updateTutors = () => {
     axios.get("/api/admin/tutors").then(allTutors => {
       setTutors(allTutors.data.tutors)
     }).catch(err => {
       console.log(err)
     })
-  }, [])
-
-  // useEffect(() => console.log(tutors), [tutors])
+    console.log("Tutor List Updated!");
+}
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -100,10 +103,10 @@ export default function Admin() {
         <Main tutors={tutors} />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <OnHold />
+        <OnHold tutors={tutors} updateTutors={updateTutors} />
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <Active />
+        <Active tutors={tutors} updateTutors={updateTutors} />
       </TabPanel>
       <TabPanel value={value} index={3}>
         <Inactive />

@@ -2,6 +2,7 @@ const db = require("../models");
 
 module.exports = {
   updateStatus: function (req, res) {
+
     const { email, accountStatus } = req.body;
 
     db.User.findOneAndUpdate(
@@ -12,9 +13,9 @@ module.exports = {
         if (err) {
           console.log(err)
         }
-
+        console.log("hello")
         console.log(user)
-        res.status(400).json({ msg: `Tutor is now ${user.accountStatus}!` })
+        res.json({ msg: `Tutor is now ${user.accountStatus}!` })
       }
     )
   },

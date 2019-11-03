@@ -142,6 +142,7 @@ for (var i = 0; i < 100; i++) {
   const timezone = ["PST", "MST", "CST", "EST"][Math.floor(Math.random() * 4)]
   const studentsWanted = Math.floor(Math.random() * (50 - 2 + 1)) + 2
   const studentsAssigned = studentsWanted - Math.floor(Math.random() * (studentsWanted - 0 + 1)) + 0
+  const accountStatus = ['hold', 'inactive', 'active', 'resigned'][Math.floor(Math.random() * 4)]
 
   fakeUsers.push({
     email: faker.internet.email(),
@@ -151,11 +152,11 @@ for (var i = 0; i < 100; i++) {
     middleName: null,
     maidenName: null,
     nickName: null,
-    accountStatus: "inactive",
+    accountStatus: accountStatus,
     timezone: randomizeTimezones(),
     curriculum: buildCurric(),
     lastAssigned: moment().subtract(Math.floor(Math.random() * 7), 'days'),
-    queueNum: 0,
+    queueNum: null,
     studentsWanted: studentsWanted,
     studentsAssigned: studentsAssigned,
     PTorFTstudents: randomizeFTPT(),
@@ -173,8 +174,14 @@ const sortedTutors = fakeUsers.sort(function(a,b){
   return new Date(a.lastAssigned) - new Date(b.lastAssigned);
 });
 
+let newNum = 1
 for (let i = 0; i < sortedTutors.length; i++) {
-    sortedTutors[i].queueNum = i+1;
+  if(sortedTutors[i].accountStatus === 'active') {
+    sortedTutors[i].queueNum = newNum;
+    newNum++
+  } else {
+    sortedTutors[i].queueNum = null;
+  }
 }
 
 

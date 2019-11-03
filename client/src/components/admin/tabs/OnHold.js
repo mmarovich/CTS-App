@@ -1,14 +1,18 @@
-import React, { Component } from "react";
+import React from "react";
 
-class OnHold extends Component {
+import OnholdList from './onhold-tools/OnholdList';
 
-  render() {
-    return(
-      <div>
-        <h5>On Hold</h5>
-      </div>
-    )
-  }
+const OnHold = (props) => {
+  console.log(props.tutors)
+  const onHoldTutors = props.tutors && props.tutors.filter((tutor, i) => {
+    return tutor.accountStatus === "hold";
+  })
+
+  return (
+    <div>
+      <OnholdList tutors={onHoldTutors} updateTutors={props.updateTutors} />
+    </div>
+  )
 }
 
 export default OnHold;

@@ -1,14 +1,20 @@
 import React, { Component } from "react";
 
-class Active extends Component {
+import ActiveList from './active-tools/ActiveList';
 
-  render() {
-    return(
-      <div>
-        <h5>Active</h5>
-      </div>
-    )
-  }
+const Active = (props) => {
+  console.log(props.tutors)
+  const activeTutors = props.tutors && props.tutors.filter((tutor, i) => {
+    return tutor.accountStatus === "active";
+  })
+
+  console.log(activeTutors)
+
+  return (
+    <div>
+      <ActiveList activeTutors={activeTutors} updateTutors={props.updateTutors} />
+    </div>
+  )
 }
 
 export default Active;

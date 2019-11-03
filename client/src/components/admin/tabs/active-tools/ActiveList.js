@@ -4,9 +4,9 @@ import ReactTooltip from 'react-tooltip'
 
 const moment = require('moment-timezone');
 
-const TutorList = (props) => {
+const ActiveList = (props) => {
 
-  console.log(props.tutors)
+  console.log(props.activeTutors)
 
   const convertAMPM = (times, timezone) => {
     const convertedTimes = times.map((time) => {
@@ -27,9 +27,8 @@ const TutorList = (props) => {
   }
 
   const renderTutors = () => {
-    console.log(props.tutors)
-    if (props.tutors) {
-      return props.tutors.map((tutor, i) => {
+    if (props.activeTutors) {
+      return props.activeTutors.map((tutor, i) => {
         return <Row style={styles.rowFont} key={i}>
           <Col xs='2'>{tutor.queueNum}</Col>
           <Col xs='2'>
@@ -96,4 +95,4 @@ const styles = {
   }
 }
 
-export default TutorList;
+export default ActiveList;
