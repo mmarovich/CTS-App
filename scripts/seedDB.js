@@ -140,9 +140,15 @@ const randomizeLanguages = () => {
 
 for (var i = 0; i < 100; i++) {
   const timezone = ["PST", "MST", "CST", "EST"][Math.floor(Math.random() * 4)]
-  const studentsWanted = Math.floor(Math.random() * (50 - 2 + 1)) + 2
+  let studentsWanted = Math.floor(Math.random() * (50 - 0 + 1)) + 0
   const studentsAssigned = studentsWanted - Math.floor(Math.random() * (studentsWanted - 0 + 1)) + 0
-  const accountStatus = ['hold', 'inactive', 'active', 'resigned'][Math.floor(Math.random() * 4)]
+  let accountStatus = ['hold', 'inactive', 'active', 'resigned'][Math.floor(Math.random() * 4)]
+
+  if (studentsWanted === 0 && accountStatus === 'active') {
+    accountStatus = 'inactive'
+  } else if (studentsWanted !== 0 && accountStatus === 'inactive') {
+    studentsWanted = 0
+  }
 
   fakeUsers.push({
     email: faker.internet.email(),
