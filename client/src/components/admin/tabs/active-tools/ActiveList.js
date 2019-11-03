@@ -32,7 +32,7 @@ const ActiveList = (props) => {
         return <Row style={styles.rowFont} key={i}>
           <Col xs='2'>{tutor.queueNum}</Col>
           <Col xs='2'>
-            <span data-tip data-for={`mainTT-${i}`} data-event='click focus'>
+            <span data-tip data-for={`activeTT-${i}`} data-event='click focus'>
               {`${tutor.firstName} 
               ${tutor.nickName ? `(${tutor.nickName})` : ''}
               ${tutor.middleName ? tutor.middleName : ''}
@@ -45,7 +45,7 @@ const ActiveList = (props) => {
           <Col xs='2'>{tutor.studentsWanted}</Col>
           <ReactTooltip 
             globalEventOff='click'
-            id={`mainTT-${i}`}  
+            id={`activeTT-${i}`}  
           >
             <h5>{tutor.firstName} {tutor.lastName} <span style={{fontSize: '12px'}}> - *{tutor.accountStatus}*  {tutor.level === 'senior tutor' ? 'Senior Tutor' : 'Tutor'}</span></h5>
             <ul>
