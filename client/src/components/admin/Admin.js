@@ -109,10 +109,10 @@ export default function Admin() {
         <Active tutors={tutors} updateTutors={updateTutors} />
       </TabPanel>
       <TabPanel value={value} index={3}>
-        <Inactive />
+        <Inactive tutors={tutors} updateTutors={updateTutors} />
       </TabPanel>
       <TabPanel value={value} index={4}>
-        <Resigned />
+        <Resigned tutors={tutors} updateTutors={updateTutors} />
       </TabPanel>
     </div>
   );

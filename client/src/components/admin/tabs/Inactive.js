@@ -1,14 +1,18 @@
-import React, { Component } from "react";
+import React from "react";
 
-class Inactive extends Component {
+import InactiveList from './inactive-tools/InactiveList';
 
-  render() {
-    return(
-      <div>
-        <h5>Inactive</h5>
-      </div>
-    )
-  }
+const Inactive = (props) => {
+
+  const inactiveTutors = props.tutors && props.tutors.filter((tutor, i) => {
+    return tutor.accountStatus === "inactive";
+  })
+
+  return (
+    <div>
+      <InactiveList inactiveTutors={inactiveTutors} updateTutors={props.updateTutors} />
+    </div>
+  )
 }
 
 export default Inactive;

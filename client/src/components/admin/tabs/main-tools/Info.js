@@ -1,7 +1,6 @@
 import React from 'react';
 
 const Info = (props) => {
-  console.log(props.tutors)
 
   const getActiveTutors = (status) => {
     const activeTutors = props.tutors.filter((tutor, i) => {

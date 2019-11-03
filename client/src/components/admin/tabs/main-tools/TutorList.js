@@ -6,8 +6,6 @@ const moment = require('moment-timezone');
 
 const TutorList = (props) => {
 
-  console.log(props.tutors)
-
   const convertAMPM = (times, timezone) => {
     const convertedTimes = times.map((time) => {
       return moment.tz(time, "HH", timezone).format("ha")
@@ -27,7 +25,7 @@ const TutorList = (props) => {
   }
 
   const renderTutors = () => {
-    console.log(props.tutors)
+  
     if (props.tutors) {
       return props.tutors.map((tutor, i) => {
         return <Row style={styles.rowFont} key={i}>

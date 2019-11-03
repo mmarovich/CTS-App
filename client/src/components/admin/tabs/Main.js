@@ -5,7 +5,6 @@ import {Info, TutorList} from './main-tools';
 
 const Main = (props) => {
 
-  console.log(props.tutors)
   return (
     <div>
       <Row>

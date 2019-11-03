@@ -6,8 +6,6 @@ const moment = require('moment-timezone');
 
 const ActiveList = (props) => {
 
-  console.log(props.activeTutors)
-
   const convertAMPM = (times, timezone) => {
     const convertedTimes = times.map((time) => {
       return moment.tz(time, "HH", timezone).format("ha")

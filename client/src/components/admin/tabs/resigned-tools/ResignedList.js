@@ -1,29 +1,17 @@
 import React from 'react';
-import axios from 'axios';
-import { Row, Col, Button } from 'reactstrap';
+import { Row, Col } from 'reactstrap';
 import ReactTooltip from 'react-tooltip'
 
-const OnholdList = (props) => {
+const moment = require('moment-timezone');
 
-  const activateTutor = (email) => {
-    axios.put('/api/admin/tutorStatus', {
-      email: email,
-      accountStatus: "inactive"
-    }).then((response) => {
-      console.log(response)
-      props.updateTutors()
-    }).catch(err => {
-      console.log(err)
-    })
-  }
+const ResignedList = (props) => {
 
   const renderTutors = () => {
-    if (props.tutors) {
-      return props.tutors.map((tutor, i) => {
+    if (props.resignedTutors) {
+      return props.resignedTutors.map((tutor, i) => {
         return <Row style={styles.rowFont} key={i}>
-          <Col xs='2'>{tutor.queueNum}</Col>
           <Col xs='2'>
-            <span data-tip data-for={`holdTT-${i}`} data-event='click focus'>
+            <span data-tip data-for={`resignedTT-${i}`} data-event='click focus'>
               {`${tutor.firstName} 
               ${tutor.nickName ? `(${tutor.nickName})` : ''}
               ${tutor.middleName ? tutor.middleName : ''}
@@ -32,21 +20,14 @@ const OnholdList = (props) => {
           </Col>
           <Col xs='2'>{tutor.email}</Col>
           <Col xs='2'>{tutor.timezone}</Col>
-          <Col xs='2'>{tutor.studentsWanted}</Col>
-          <Col xs='1'>
-            <Button 
-              color="primary" 
-              size="sm"
-              onClick={() => activateTutor(tutor.email)}
-            >Activate</Button>
-          </Col>
-          <ReactTooltip
+          <Col xs='2'>{moment(tutor.lastAssigned).format('M/D/YY')}</Col>
+          <ReactTooltip 
             globalEventOff='click'
-            id={`holdTT-${i}`}
+            id={`resignedTT-${i}`}  
           >
-            <h5>{tutor.firstName} {tutor.lastName} <span style={{ fontSize: '12px' }}> - *{tutor.accountStatus}*  {tutor.level === 'senior tutor' ? 'Senior Tutor' : 'Tutor'}</span></h5>
+            <h5>{tutor.firstName} {tutor.lastName} <span style={{fontSize: '12px'}}> - *{tutor.accountStatus}*  {tutor.level === 'senior tutor' ? 'Senior Tutor' : 'Tutor'}</span></h5>
             <ul>
-              {tutor.earlyStudentsOnly ? <li>EARLY STUDENTS ONLY</li> : null}
+            {tutor.earlyStudentsOnly ? <li>EARLY STUDENTS ONLY</li> : null}
               <li><b>Wants</b> {tutor.PTorFTstudents.join(', ').replace(/,(?!.*,)/gmi, ' and')} students, for {tutor.curriculum.join(', ').replace(/,(?!.*,)/gmi, ' and')}</li>
               <li><b>Can Teach In-Person:</b> {tutor.Unis4InPerson.length ? tutor.Unis4InPersonjoin(', ').replace(/,(?!.*,)/gmi, ' and') : 'No'}</li>
               <li><b>Native English: {tutor.nativeEnglish ? 'Yes' : 'No'}</b></li>
@@ -64,11 +45,10 @@ const OnholdList = (props) => {
   return (
     <div>
       <Row style={styles.headerStyles}>
-        <Col xs='2'>Queue</Col>
         <Col xs='2'>Name</Col>
         <Col xs='2'>Email</Col>
         <Col xs='2'>Timezone</Col>
-        <Col xs='2'>Wanted</Col>
+        <Col xs='2'>Last Assigned</Col>
       </Row>
       {renderTutors()}
     </div>
@@ -89,4 +69,4 @@ const styles = {
   }
 }
 
-export default OnholdList;
+export default ResignedList;
