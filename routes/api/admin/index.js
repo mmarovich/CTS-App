@@ -4,7 +4,8 @@ const statusController = require("../../../controllers/statusController");
 const queueController = require("../../../controllers/queueController");
 
 router.route("/tutors")
-  .get(tutorsController.findAll);
+  .get(tutorsController.findAll)
+  .put(tutorsController.update)
 
 router.route("/tutorStatus")
   .put(statusController.updateStatus);

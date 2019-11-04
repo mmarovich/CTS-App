@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Row, Col } from 'reactstrap';
 import ReactTooltip from 'react-tooltip';
-const moment = require('moment-timezone');
+import axios from 'axios';
+import moment from 'moment-timezone';
 
 const TutorRow = (props) => {
   const [wanted, setWanted] = useState(props.tutor.studentsWanted)
@@ -21,6 +22,16 @@ const TutorRow = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    axios.put("/api/admin/tutors", {
+      email: props.tutor.email,
+      studentsWanted: wanted
+    }).then(response => {
+      console.log("hello")
+      console.log(response.data)
+      props.updateTutors()
+    }).catch(err => {
+      console.log(err)
+    })
     console.log(wanted)
   }
 
