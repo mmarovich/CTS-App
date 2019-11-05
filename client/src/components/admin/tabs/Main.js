@@ -14,6 +14,7 @@ const Main = (props) => {
   }
 
   useEffect(() => {
+    console.log("mounted")
     getAllTutors();
   }, [])
 
