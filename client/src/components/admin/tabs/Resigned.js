@@ -1,16 +1,24 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
+import axios from 'axios';
 
 import ResignedList from './resigned-tools/ResignedList';
 
 const Resigned = (props) => {
+  const [resignedTutors, setResignedTutors] = useState()
 
-  const resignedTutors = props.tutors && props.tutors.filter((tutor, i) => {
-    return tutor.accountStatus === "resigned";
-  })
+  const getResignedTutors = async () => {
+    const response = await axios.get("api/admin/resignTutors")
+    const resignTutors = response.data;
+    setResignedTutors(resignTutors)
+  }
+
+  useEffect(() => {
+    getResignedTutors()
+  }, [])
 
   return (
     <div>
-      <ResignedList resignedTutors={resignedTutors} updateTutors={props.updateTutors} />
+      <ResignedList resignedTutors={resignedTutors} />
     </div>
   )
 }

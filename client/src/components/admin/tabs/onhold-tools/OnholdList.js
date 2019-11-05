@@ -5,21 +5,19 @@ import ReactTooltip from 'react-tooltip'
 
 const OnholdList = (props) => {
 
-  const activateTutor = (email) => {
-    axios.put('/api/admin/tutorStatus', {
-      email: email,
-      accountStatus: "inactive"
-    }).then((response) => {
-      console.log(response)
-      props.updateTutors()
-    }).catch(err => {
-      console.log(err)
+  const takeOffHold = async (email) => {
+    const response = await axios.put('api/admin/tutorStatus', {
+      email: email, accountStatus: 'inactive'
     })
+
+    const msg = response.data
+    console.log(msg)
+    props.getOnHoldTutors()
   }
 
   const renderTutors = () => {
-    if (props.tutors) {
-      return props.tutors.map((tutor, i) => {
+    if (props.onHoldTutors) {
+      return props.onHoldTutors.map((tutor, i) => {
         return <Row style={styles.rowFont} key={i}>
           <Col xs='2'>{tutor.queueNum}</Col>
           <Col xs='2'>
@@ -37,7 +35,7 @@ const OnholdList = (props) => {
             <Button 
               color="primary" 
               size="sm"
-              onClick={() => activateTutor(tutor.email)}
+              onClick={() => takeOffHold(tutor.email)}
             >Activate</Button>
           </Col>
           <ReactTooltip

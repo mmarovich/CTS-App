@@ -5,8 +5,7 @@ import axios from 'axios';
 import moment from 'moment-timezone';
 
 const TutorRow = (props) => {
-  const [wanted, setWanted] = useState(props.tutor.studentsWanted)
-  console.log(props.tutor.studentsWanted)
+  const [wanted, setWanted] = useState(0)
 
   useEffect(() => {
     console.log(wanted)
@@ -16,23 +15,17 @@ const TutorRow = (props) => {
     setWanted(e.target.value)
   }
 
-  const handleClick = () => {
-    setWanted('')
-  }
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    axios.put("/api/admin/tutors", {
+    const response = await axios.put("api/admin/tutors", {
       email: props.tutor.email,
       studentsWanted: wanted
-    }).then(response => {
-      console.log("hello")
-      console.log(response.data)
-      props.updateTutors()
-    }).catch(err => {
-      console.log(err)
     })
-    console.log(wanted)
+
+    const msg = response.data
+    console.log(msg)
+    setWanted(0)
+    props.getInactiveTutors()
   }
 
   const convertAMPM = (times, timezone) => {
@@ -74,7 +67,6 @@ const TutorRow = (props) => {
             type='text'
             value={wanted}
             onChange={(e) => handleChange(e)}
-            onClick={() => handleClick()}
           />
           <button>Throw In!</button>
         </form>

@@ -26,8 +26,8 @@ const TutorList = (props) => {
 
   const renderTutors = () => {
   
-    if (props.tutors) {
-      return props.tutors.map((tutor, i) => {
+    if (props.allTutors) {
+      return props.allTutors.map((tutor, i) => {
         return <Row style={styles.rowFont} key={i}>
           <Col xs='2'>{tutor.queueNum}</Col>
           <Col xs='2'>

@@ -7,8 +7,24 @@ module.exports = {
         console.log(err)
       }
 
-      res.json({ tutors })
+      res.send(tutors)
     })
+  },
+  findHold: async (req, res) => {
+    const holdTutors = await db.User.find({accountStatus: 'hold'})
+    res.send(holdTutors)
+  },
+  findActive: async (req, res) => {
+    const activeTutors = await db.User.find({accountStatus: 'active'})
+    res.send(activeTutors)
+  },
+  findInactive: async (req, res) => {
+    const inactiveTutors = await db.User.find({accountStatus: 'inactive'})
+    res.send(inactiveTutors)
+  },
+  findResigned: async (req, res) => {
+    const resignTutors = await db.User.find({accountStatus: 'resigned'})
+    res.send(resignTutors)
   },
   update: function (req, res) {
     const { email, studentsWanted } = req.body;

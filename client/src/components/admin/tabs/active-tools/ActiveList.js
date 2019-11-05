@@ -28,7 +28,7 @@ const ActiveList = (props) => {
     if (props.activeTutors) {
       return props.activeTutors.map((tutor, i) => {
         return <Row style={styles.rowFont} key={i}>
-          <Col xs='2'>{tutor.queueNum}</Col>
+          <Col xs='2'>{i+1}</Col>
           <Col xs='2'>
             <span data-tip data-for={`activeTT-${i}`} data-event='click focus'>
               {`${tutor.firstName} 

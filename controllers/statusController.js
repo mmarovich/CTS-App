@@ -4,6 +4,7 @@ module.exports = {
   updateStatus: function (req, res) {
 
     const { email, accountStatus } = req.body;
+    console.log(email, accountStatus)
 
     db.User.findOneAndUpdate(
       { email: email },
@@ -13,9 +14,8 @@ module.exports = {
         if (err) {
           console.log(err)
         }
-        console.log("hello")
-        console.log(user)
-        res.json({ msg: `Tutor is now ${user.accountStatus}!` })
+      
+        res.send(`Tutor is now ${user.accountStatus}!`)
       }
     )
   },

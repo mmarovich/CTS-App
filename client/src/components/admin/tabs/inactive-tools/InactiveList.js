@@ -8,7 +8,7 @@ const InactiveList = (props) => {
   const renderTutors = () => {
     if (props.inactiveTutors) {
       return props.inactiveTutors.map((tutor, i) => {
-        return <TutorRow tutor={tutor} key={i} id={i} updateTutors={props.updateTutors} />
+        return <TutorRow tutor={tutor} key={i} id={i} getInactiveTutors={props.getInactiveTutors} />
       })
     } else {
       return;

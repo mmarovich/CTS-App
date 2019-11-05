@@ -1,16 +1,24 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
+import axios from 'axios';
 
 import OnholdList from './onhold-tools/OnholdList';
 
 const OnHold = (props) => {
+  const [onHoldTutors, setOnHoldTutors] = useState();
   
-  const onHoldTutors = props.tutors && props.tutors.filter((tutor, i) => {
-    return tutor.accountStatus === "hold";
-  })
+  const getOnHoldTutors = async () => {
+    const response = await axios.get("/api/admin/holdTutors")
+    const holdTutors = response.data;
+    setOnHoldTutors(holdTutors);
+  }
+
+  useEffect(() => {
+    getOnHoldTutors();
+  }, [])
 
   return (
     <div>
-      <OnholdList tutors={onHoldTutors} updateTutors={props.updateTutors} />
+      <OnholdList onHoldTutors={onHoldTutors} getOnHoldTutors={getOnHoldTutors} />
     </div>
   )
 }

@@ -100,10 +100,10 @@ export default function Admin() {
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-        <Main tutors={tutors} />
+        <Main />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <OnHold tutors={tutors} updateTutors={updateTutors} />
+        <OnHold updateTutors={updateTutors} />
       </TabPanel>
       <TabPanel value={value} index={2}>
         <Active tutors={tutors} updateTutors={updateTutors} />

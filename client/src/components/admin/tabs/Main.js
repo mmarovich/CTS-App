@@ -1,9 +1,21 @@
-import React from "react";
-import {Row, Col} from 'reactstrap';
+import React, { useState, useEffect } from "react";
+import { Row, Col } from 'reactstrap';
 
-import {Info, TutorList} from './main-tools';
+import { Info, TutorList } from './main-tools';
+import axios from "axios";
 
 const Main = (props) => {
+  const [allTutors, setAllTutors] = useState();
+
+  const getAllTutors = async () => {
+    let response = await axios.get("/api/admin/tutors");
+    const tutors = response.data
+    setAllTutors(tutors);
+  }
+
+  useEffect(() => {
+    getAllTutors();
+  }, [])
 
   return (
     <div>
@@ -12,10 +24,10 @@ const Main = (props) => {
 
         </Col>
         <Col xs={6}>
-          <Info tutors={props.tutors}/>
+          <Info allTutors={allTutors} />
         </Col>
       </Row>
-      <TutorList tutors={props.tutors} />
+      <TutorList allTutors={allTutors} />
     </div>
   )
 }
