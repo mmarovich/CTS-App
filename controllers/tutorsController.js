@@ -1,4 +1,5 @@
 const db = require("../models");
+const _ = require("lodash")
 
 module.exports = {
   findAll: function (req, res) {
@@ -7,7 +8,13 @@ module.exports = {
         console.log(err)
       }
 
-      res.send(tutors)
+      const allTutors = _.map(tutors, tutor => 
+        _.omit(tutor.toObject(), ['password'])
+      )
+
+      console.log(allTutors)
+
+      res.send(allTutors)
     })
   },
   findHold: async (req, res) => {
