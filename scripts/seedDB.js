@@ -127,6 +127,16 @@ const randomizeLanguages = () => {
   return tutorsChoice;
 }
 
+const sixMago = moment().subtract(6, 'months');
+const now = moment();
+
+function randomDate(start, end, startHour, endHour) {
+  var date = new Date(+start + Math.random() * (end - start));
+  var hour = startHour + Math.random() * (endHour - startHour) | 0;
+  date.setHours(hour);
+  return date;
+}
+
 // ***************
 
 // TIMEZONE CONVERSION METHODS AND LIST OF TIMEZONES
@@ -143,6 +153,7 @@ for (var i = 0; i < 200; i++) {
   let studentsWanted = Math.floor(Math.random() * (50 - 0 + 1)) + 0
   const studentsAssigned = studentsWanted - Math.floor(Math.random() * (studentsWanted - 0 + 1)) + 0
   let accountStatus = ['hold', 'inactive', 'active', 'resigned'][Math.floor(Math.random() * 4)]
+
 
   if (studentsWanted === 0 && accountStatus === 'active') {
     accountStatus = 'inactive'
@@ -161,7 +172,7 @@ for (var i = 0; i < 200; i++) {
     accountStatus: accountStatus,
     timezone: randomizeTimezones(),
     curriculum: buildCurric(),
-    lastAssigned: moment().subtract(Math.floor(Math.random() * 6), 'months'),
+    lastAssigned: randomDate(sixMago, now),
     studentsWanted: studentsWanted,
     studentsAssigned: studentsAssigned,
     PTorFTstudents: randomizeFTPT(),
