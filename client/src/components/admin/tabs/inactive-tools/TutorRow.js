@@ -61,15 +61,15 @@ const TutorRow = (props) => {
       <Col xs='2'>{tutor.email}</Col>
       <Col xs='2'>{tutor.timezone}</Col>
       <Col xs='2'>{moment(tutor.lastAssigned).format('M/D/YY')}</Col>
-      <Col xs='2'>
-        <form onSubmit={handleSubmit}>
+      <Col xs='1'>
           <input
             type='text'
             value={wanted}
             onChange={(e) => handleChange(e)}
           />
-          <button>Throw In!</button>
-        </form>
+      </Col>
+      <Col xs='1'>
+          <button type="submit" onClick={handleSubmit}>Throw In!</button>
       </Col>
       <ReactTooltip
         globalEventOff='click'

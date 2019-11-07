@@ -47,10 +47,6 @@ const UserSchema = new Schema({
     type: Date,
     default: null
   },
-  queueNum: {
-    type: Number,
-    default: null
-  },
   studentsWanted: {
     type: Number,
     default: 0

@@ -18,7 +18,7 @@ const db = require("./config/keys").mongoURI;
 // Connect to MongoDB
 mongoose.connect(
   process.env.MONGODB_URI || "mongodb://localhost/CTS-db",
-  { useNewUrlParser: true, useUnifiedTopology: true }
+  { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false }
 ).then(() => console.log("MongoDB successfully connected"))
 .catch(err => console.log(err));
 

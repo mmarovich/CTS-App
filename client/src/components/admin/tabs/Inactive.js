@@ -1,6 +1,7 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { Row, Col } from 'reactstrap';
 import axios from 'axios';
+import moment from 'moment';
 
 import InactiveList from './inactive-tools/InactiveList';
 
@@ -18,16 +19,36 @@ const Inactive = (props) => {
   const handleSearch = (e) => {
     const query = e.target.value;
     setSearchField(query);
-    
+
     const q = query.toLowerCase();
     const newTutors = inactiveTutors.filter((tutor) => {
-      return Object.values(tutor).some( val => 
-        String(val).toLowerCase().includes(q) 
+      return Object.values(tutor).some(val =>
+        String(val).toLowerCase().includes(q)
       );
     })
-    
+
     setFilteredTutors(newTutors);
 
+  }
+
+  const get3MonthsInactive = () => {
+    const threeMonthsInactive = inactiveTutors.map((tutor, i) => {
+      var now = moment(new Date()); //todays date
+      var end = moment(tutor.lastAssigned); // another date
+      var duration = moment.duration(now.diff(end));
+      var months = duration.asMonths();
+      
+      if (months > 3) {
+        return <p key={i} style={{
+          margin: '0 5px 0 0',
+          fontSize: '10px',
+          display: 'inline',
+          backgroundColor: 'rgb(255, 153, 153)'
+        }}>{tutor.firstName} {tutor.lastName}</p>
+      }
+    })
+
+    return threeMonthsInactive;
   }
 
   useEffect(() => {
@@ -50,7 +71,10 @@ const Inactive = (props) => {
           />
         </Col>
         <Col xs={6}>
-
+          <div>
+            <h4>Tutors Inactive > 3 Months</h4>
+            <div>{inactiveTutors && get3MonthsInactive()}</div>
+          </div>
         </Col>
       </Row>
       <InactiveList inactiveTutors={filteredTutors ? filteredTutors : inactiveTutors} getInactiveTutors={getInactiveTutors} />

@@ -8,7 +8,7 @@ module.exports = {
         console.log(err)
       }
 
-      const allTutors = _.map(tutors, tutor => 
+      const allTutors = _.map(tutors, tutor =>
         _.omit(tutor.toObject(), ['password'])
       )
 
@@ -16,50 +16,54 @@ module.exports = {
     })
   },
   findHold: async (req, res) => {
-    const holdTutors = await db.User.find({accountStatus: 'hold'})
+    const holdTutors = await db.User.find({ accountStatus: 'hold' })
     res.send(holdTutors)
   },
   findActive: async (req, res) => {
-    const activeTutors = await db.User.find({accountStatus: 'active'})
+    const activeTutors = await db.User.find({ accountStatus: 'active' })
     res.send(activeTutors)
   },
   findInactive: async (req, res) => {
-    const inactiveTutors = await db.User.find({accountStatus: 'inactive'})
+    const inactiveTutors = await db.User.find({ accountStatus: 'inactive' })
     res.send(inactiveTutors)
   },
   findResigned: async (req, res) => {
-    const resignTutors = await db.User.find({accountStatus: 'resigned'})
+    const resignTutors = await db.User.find({ accountStatus: 'resigned' })
     res.send(resignTutors)
   },
   update: function (req, res) {
     const { email, studentsWanted } = req.body;
 
-    db.User.findOne({ email }, (err, user) => {
-      if (err) console.log(err);
-      const timezoneCheck = user.timezone ? user.timezone : null;
-      const curriculumCheck = user.curriculum.length ? user.curriculum : null;
-      const timesAvailableCheck = user.timesAvailable.length ? user.timesAvailable : null;
-      const daysAvailableCheck = user.daysAvailable.length ? user.daysAvailable : null;
+    if (studentsWanted <= 0) {
+      res.json({msg: 'Please set the number of students this tutor wants.'})
+    } else {
+      db.User.findOne({ email }, (err, user) => {
+        if (err) console.log(err);
+        const timezoneCheck = user.timezone ? user.timezone : null;
+        const curriculumCheck = user.curriculum.length ? user.curriculum : null;
+        const timesAvailableCheck = user.timesAvailable.length ? user.timesAvailable : null;
+        const daysAvailableCheck = user.daysAvailable.length ? user.daysAvailable : null;
 
-      if (!timezoneCheck || !curriculumCheck ||
-        !timesAvailableCheck || !daysAvailableCheck) {
-        res.json({
-          msg: `Tutor still needs to set: ${timezoneCheck ? "" : "|Timezone|"}${curriculumCheck ? "" : "|Curriculum|"}${timesAvailableCheck ? "" : "|Times Available|"}${daysAvailableCheck ? "" : "|Days Available"}`
-        })
-      } else {
-        db.User.findOneAndUpdate(
-          { email: email },
-          { $set: { studentsWanted, accountStatus: "active" } },
-          { new: true },
-          (err, user) => {
-            if (err) {
-              console.log(err)
+        if (!timezoneCheck || !curriculumCheck ||
+          !timesAvailableCheck || !daysAvailableCheck) {
+          res.json({
+            msg: `${user.firstName} still needs to set: ${timezoneCheck ? "" : "|Timezone|"}${curriculumCheck ? "" : "|Curriculum|"}${timesAvailableCheck ? "" : "|Times Available|"}${daysAvailableCheck ? "" : "|Days Available"}`
+          })
+        } else {
+          db.User.findOneAndUpdate(
+            { email: email },
+            { $set: { studentsWanted, accountStatus: "active" } },
+            { new: true },
+            (err, user) => {
+              if (err) {
+                console.log(err)
+              }
+
+              res.json({ msg: `${user.firstName} ${user.lastName} was thrown in for ${user.studentsWanted} students!` })
             }
-
-            res.json({ msg: `Tutor was thrown in for ${user.studentsWanted} students!` })
-          }
-        )
-      }
-    });
+          )
+        }
+      });
+    }
   }
 }
