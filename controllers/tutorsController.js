@@ -12,8 +12,6 @@ module.exports = {
         _.omit(tutor.toObject(), ['password'])
       )
 
-      console.log(allTutors)
-
       res.send(allTutors)
     })
   },

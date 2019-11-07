@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Row, Col } from 'reactstrap';
-import _ from 'lodash';
 
 import { Info, TutorList } from './main-tools';
 import axios from "axios";
