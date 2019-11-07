@@ -31,7 +31,6 @@ const Active = (props) => {
       setFilteredTutors(newTutors);
 
     } else if (id) {
-      console.log("hello")
       const newTutors = activeTutors.filter((tutor) => {
         return tutor.curriculum.includes(id)
       })
