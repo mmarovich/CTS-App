@@ -5,16 +5,17 @@ const queueController = require("../../../controllers/queueController");
 
 router.route("/tutors")
   .get(tutorsController.findAll)
-  .put(tutorsController.update)
 
 router.route("/holdTutors")
   .get(tutorsController.findHold)
 
 router.route("/activeTutors")
   .get(tutorsController.findActive)
+  .put(queueController.assignTutor)
 
 router.route("/inactiveTutors")
   .get(tutorsController.findInactive)
+  .put(queueController.throwIn)
 
 router.route("/resignTutors")
   .get(tutorsController.findResigned)

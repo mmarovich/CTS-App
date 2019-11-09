@@ -32,8 +32,10 @@ const Inactive = (props) => {
   }
 
   const get3MonthsInactive = () => {
+
+    var now = moment(new Date()); //todays date
+    
     const threeMonthsInactive = inactiveTutors.map((tutor, i) => {
-      var now = moment(new Date()); //todays date
       var end = moment(tutor.lastAssigned); // another date
       var duration = moment.duration(now.diff(end));
       var months = duration.asMonths();
@@ -45,6 +47,8 @@ const Inactive = (props) => {
           display: 'inline',
           backgroundColor: 'rgb(255, 153, 153)'
         }}>{tutor.firstName} {tutor.lastName}</p>
+      } else {
+        return null;
       }
     })
 

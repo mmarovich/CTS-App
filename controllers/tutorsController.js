@@ -21,49 +21,24 @@ module.exports = {
   },
   findActive: async (req, res) => {
     const activeTutors = await db.User.find({ accountStatus: 'active' })
-    res.send(activeTutors)
+    
+    const sortedActives = activeTutors.sort(function(a,b){
+      return new Date(a.lastAssigned) - new Date(b.lastAssigned);
+    });
+    
+    res.send(sortedActives)
   },
   findInactive: async (req, res) => {
     const inactiveTutors = await db.User.find({ accountStatus: 'inactive' })
-    res.send(inactiveTutors)
+    
+    const sortedInactives = inactiveTutors.sort(function(a,b){
+      return new Date(a.lastAssigned) - new Date(b.lastAssigned);
+    });
+    
+    res.send(sortedInactives)
   },
   findResigned: async (req, res) => {
     const resignTutors = await db.User.find({ accountStatus: 'resigned' })
     res.send(resignTutors)
-  },
-  update: function (req, res) {
-    const { email, studentsWanted } = req.body;
-
-    if (studentsWanted <= 0) {
-      res.json({msg: 'Please set the number of students this tutor wants.'})
-    } else {
-      db.User.findOne({ email }, (err, user) => {
-        if (err) console.log(err);
-        const timezoneCheck = user.timezone ? user.timezone : null;
-        const curriculumCheck = user.curriculum.length ? user.curriculum : null;
-        const timesAvailableCheck = user.timesAvailable.length ? user.timesAvailable : null;
-        const daysAvailableCheck = user.daysAvailable.length ? user.daysAvailable : null;
-
-        if (!timezoneCheck || !curriculumCheck ||
-          !timesAvailableCheck || !daysAvailableCheck) {
-          res.json({
-            msg: `${user.firstName} still needs to set: ${timezoneCheck ? "" : "|Timezone|"}${curriculumCheck ? "" : "|Curriculum|"}${timesAvailableCheck ? "" : "|Times Available|"}${daysAvailableCheck ? "" : "|Days Available"}`
-          })
-        } else {
-          db.User.findOneAndUpdate(
-            { email: email },
-            { $set: { studentsWanted, accountStatus: "active" } },
-            { new: true },
-            (err, user) => {
-              if (err) {
-                console.log(err)
-              }
-
-              res.json({ msg: `${user.firstName} ${user.lastName} was thrown in for ${user.studentsWanted} students!` })
-            }
-          )
-        }
-      });
-    }
   }
 }

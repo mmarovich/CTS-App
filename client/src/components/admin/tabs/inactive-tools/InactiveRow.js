@@ -1,15 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Row, Col } from 'reactstrap';
 import ReactTooltip from 'react-tooltip';
 import axios from 'axios';
 import moment from 'moment-timezone';
 
-const TutorRow = (props) => {
+const InactiveRow = (props) => {
   const [wanted, setWanted] = useState(0)
-
-  useEffect(() => {
-    console.log(wanted)
-  }, [wanted])
 
   const handleChange = (e) => {
     setWanted(e.target.value)
@@ -17,7 +13,7 @@ const TutorRow = (props) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    const response = await axios.put("api/admin/tutors", {
+    const response = await axios.put("api/admin/inactiveTutors", {
       email: props.tutor.email,
       studentsWanted: wanted
     })
@@ -101,4 +97,4 @@ const styles = {
   }
 }
 
-export default TutorRow;
+export default InactiveRow;

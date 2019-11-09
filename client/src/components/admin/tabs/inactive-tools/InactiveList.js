@@ -1,14 +1,14 @@
 import React from 'react';
 import { Row, Col } from 'reactstrap';
 
-import TutorRow from './TutorRow';
+import InactiveRow from './InactiveRow';
 
 const InactiveList = (props) => {
 
   const renderTutors = () => {
     if (props.inactiveTutors) {
       return props.inactiveTutors.map((tutor, i) => {
-        return <TutorRow tutor={tutor} key={i} id={i} getInactiveTutors={props.getInactiveTutors} />
+        return <InactiveRow tutor={tutor} key={i} id={i} getInactiveTutors={props.getInactiveTutors} />
       })
     } else {
       return;

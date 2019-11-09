@@ -12,6 +12,7 @@ const Active = (props) => {
   const getActiveTutors = async () => {
     const response = await axios.get("api/admin/activeTutors")
     const allActiveTutors = response.data;
+    console.log(allActiveTutors)
     setFilteredTutors(null)
     setActiveTutors(allActiveTutors);
   }
@@ -94,7 +95,7 @@ const Active = (props) => {
           >Reset</Button>
         </Col>
       </Row>
-      <ActiveList activeTutors={filteredTutors ? filteredTutors : activeTutors} />
+      <ActiveList activeTutors={filteredTutors ? filteredTutors : activeTutors} getActiveTutors={getActiveTutors}/>
     </div>
   )
 }

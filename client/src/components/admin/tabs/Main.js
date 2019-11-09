@@ -32,13 +32,8 @@ const Main = (props) => {
   }
 
   useEffect(() => {
-    console.log("mounted")
     getAllTutors();
   }, [])
-
-  useEffect(() => {
-    console.log(filteredTutors)
-  }, [filteredTutors])
 
   return (
     <div>
