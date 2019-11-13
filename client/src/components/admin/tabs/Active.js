@@ -12,7 +12,6 @@ const Active = (props) => {
   const getActiveTutors = async () => {
     const response = await axios.get("api/admin/activeTutors")
     const allActiveTutors = response.data;
-    console.log(allActiveTutors)
     setFilteredTutors(null)
     setActiveTutors(allActiveTutors);
   }

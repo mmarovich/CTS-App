@@ -137,16 +137,6 @@ function randomDate(start, end, startHour, endHour) {
   return date;
 }
 
-// ***************
-
-// TIMEZONE CONVERSION METHODS AND LIST OF TIMEZONES
-// ALSO REFER TO https://momentjs.com/timezone/
-  
-// console.log(moment.tz('13', "HH", 'America/New_York').tz('Asia/Manila').format("HH"))
-// console.log(moment.tz.names())
-
-// ***************
-
 
 for (var i = 0; i < 200; i++) {
   const timezone = ["PST", "MST", "CST", "EST"][Math.floor(Math.random() * 4)]

@@ -59,10 +59,6 @@ const Inactive = (props) => {
     getInactiveTutors()
   }, [])
 
-  useEffect(() => {
-    console.log(inactiveTutors)
-  }, [inactiveTutors])
-
   return (
     <div>
       <Row>

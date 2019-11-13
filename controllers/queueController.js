@@ -20,7 +20,6 @@ module.exports = {
           console.log(err)
         }
 
-        console.log(user)
         res.json({ msg: `Tutor is now in queue for ${user.studentsWanted}` })
       }
     )

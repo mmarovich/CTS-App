@@ -5,7 +5,9 @@ import axios from 'axios';
 import moment from 'moment-timezone';
 
 const InactiveRow = (props) => {
-  const [wanted, setWanted] = useState(0)
+  const { tutor, id } = props;
+  const {studentsWanted, email} = props.tutor;
+  const [wanted, setWanted] = useState(studentsWanted)
 
   const handleChange = (e) => {
     setWanted(e.target.value)
@@ -14,13 +16,13 @@ const InactiveRow = (props) => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     const response = await axios.put("api/admin/inactiveTutors", {
-      email: props.tutor.email,
+      email,
       studentsWanted: wanted
     })
 
     const msg = response.data
     console.log(msg)
-    setWanted(0)
+    setWanted(studentsWanted)
     props.getInactiveTutors()
   }
 
@@ -43,7 +45,6 @@ const InactiveRow = (props) => {
     return convertedTimes;
   }
 
-  const { tutor, id } = props;
   return (
     <Row style={styles.rowFont}>
       <Col xs='2'>

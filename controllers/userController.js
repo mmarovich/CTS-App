@@ -10,7 +10,6 @@ const db = require("../models");
 
 module.exports = {
   create: function (req, res) {
-    console.log(req.body)
     // Form validation
 
     const { errors, isValid } = validateRegisterInput(req.body);
@@ -31,8 +30,6 @@ module.exports = {
         const newUser = new User({
           email, firstName, lastName, password,
         });
-
-        console.log(newUser)
 
         // Hash password before saving in database
         bcrypt.genSalt(10, (err, salt) => {
@@ -55,7 +52,6 @@ module.exports = {
 
     // Check validation
     if (!isValid) {
-      console.log("hello")
       return res.status(400).json(errors);
     }
 
@@ -74,7 +70,6 @@ module.exports = {
         if (isMatch) {
           // User matched
           // Create JWT Payload
-          console.log(user.accountStatus)
           const payload = {
             id: user.id,
             email: user.email,

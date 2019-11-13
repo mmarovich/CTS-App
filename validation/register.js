@@ -2,7 +2,6 @@ const Validator = require("validator");
 const isEmpty = require("is-empty");
 
 module.exports = function validateRegisterInput(data) {
-  console.log(data)
   let errors = {};
 
   // Convert empty fields to an empty string so we can use validator functions
@@ -14,7 +13,6 @@ module.exports = function validateRegisterInput(data) {
 
   // Name checks
   if (Validator.isEmpty(data.firstName)) {
-    console.log(data.firstName)
     errors.firstName = "First Name field is required";
   }
 

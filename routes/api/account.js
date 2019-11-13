@@ -3,8 +3,14 @@ const router = express.Router();
 
 const accountController = require("../../controllers/accountController");
 
+router.route("/tutor")
+  .post(accountController.getTutorInfo)
+
 router.route("/name")
   .put(accountController.updateName)
+
+router.route("/studentsWanted")
+  .put(accountController.updateStudentsWanted)
 
 router.route("/timezone")
   .put(accountController.updateTimezone)

@@ -5,6 +5,7 @@ import { logoutUser } from "../../actions/authActions";
 
 import Navbar from "../../components/layout/Navbar";
 import Admin from "../admin/Admin";
+import TutorPortal from '../tutor/TutorPortal';
 
 class Dashboard extends Component {
   onLogoutClick = e => {
@@ -23,18 +24,7 @@ class Dashboard extends Component {
           
           :
 
-          <div className="row">
-          <div className="landing-copy col s12 center-align">
-            <h4>
-              <b>Hey there,</b> {user.firstName}
-              <p className="flow-text grey-text text-darken-1">
-                You are logged into a full-stack{" "}
-                <span style={{ fontFamily: "monospace" }}>MERN</span> app 👏
-              </p>
-            </h4>
-            
-          </div>
-        </div>
+          <TutorPortal />
         }
         
         
