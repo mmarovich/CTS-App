@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -14,19 +14,12 @@ const StudentType = (props) => {
     FinTech: false
   });
 
-  useEffect(() => {
-    console.log(state)
-  }, [state])
-
   const handleChange = name => e => {
-    let newCurriculum;
+    let newCurriculum = curriculum;
     if (e.target.checked === true) {
-      newCurriculum = curriculum;
       newCurriculum.push(name)
     } else {
       let index = curriculum.indexOf(name)
-      console.log(index)
-      newCurriculum = curriculum;
       newCurriculum.splice(index, 1)
     }
     saveCurrics(newCurriculum)
@@ -43,7 +36,6 @@ const StudentType = (props) => {
   }
 
   const renderCheckboxes = () => {
-    console.log(state)
     let newState = state;
     
     const checkBoxes = Object.keys(state).map((key, i) => {

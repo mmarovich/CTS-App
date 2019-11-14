@@ -29,6 +29,7 @@ module.exports = {
   },
   updateTimezone: function (req, res) {
     const { email, timezone } = req.body;
+    console.log(email, timezone)
 
     db.User.findOneAndUpdate(
       { email },
@@ -39,8 +40,7 @@ module.exports = {
           console.log(err)
         }
 
-        console.log(user)
-        res.status(400).json({ msg: "Timezone Updated!" })
+        res.send({ msg: "Timezone Updated!" })
       }
     )
   },

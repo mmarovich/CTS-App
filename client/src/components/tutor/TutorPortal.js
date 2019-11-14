@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Row, Col } from 'reactstrap';
 import { connect } from "react-redux";
 
-import { StudentsWanted, StudentType } from './tutor-tools';
+import { StudentsWanted, StudentType, 
+  Timezone, TimePreferences
+} from './tutor-tools';
 import axios from 'axios';
 
 
@@ -29,7 +31,7 @@ const TutorPortal = (props) => {
     console.log(tutor)
   }, [tutor])
 
-
+  const {email, timezone, timesAvailable} = tutor;
   return (
     <div>
       <h1>Tutor Portal!</h1>
@@ -43,14 +45,26 @@ const TutorPortal = (props) => {
         </h4>
         {
           !loading ?
-            <Row>
-              <Col xs='6'>
-                <StudentsWanted studentsWanted={tutor.studentsWanted || 0} email={tutor.email} />
-              </Col>
-              <Col xs='6'>
-                <StudentType curriculum={tutor.curriculum} email={tutor.email} />
-              </Col>
-            </Row> :
+            <div>
+              <Row>
+                <Col xs='6'>
+                  <StudentsWanted studentsWanted={tutor.studentsWanted || 0} email={tutor.email} />
+                </Col>
+                <Col xs='6'>
+                  <StudentType curriculum={tutor.curriculum} email={tutor.email} />
+                </Col>
+              </Row>
+              <Row>
+                <Col xs='6'>
+                  <Timezone savedTimezone={timezone} email={email} />
+                </Col>
+                <Col xs='6'>
+                  <TimePreferences timesAvailable={timesAvailable} email={email} />
+                </Col>
+              </Row>
+            </div>
+
+            :
 
             <h2>Loading...</h2>
         }
