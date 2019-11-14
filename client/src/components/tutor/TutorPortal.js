@@ -48,7 +48,7 @@ const TutorPortal = (props) => {
                 <StudentsWanted studentsWanted={tutor.studentsWanted || 0} email={tutor.email} />
               </Col>
               <Col xs='6'>
-                <StudentType curriculum={tutor.curriculum} />
+                <StudentType curriculum={tutor.curriculum} email={tutor.email} />
               </Col>
             </Row> :
 

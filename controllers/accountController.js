@@ -56,8 +56,7 @@ module.exports = {
           console.log(err)
         }
 
-        console.log(user)
-        res.status(400).json({ msg: "Curriculum Preferences Updated!" })
+        res.send({ msg: "Curriculum Preferences Updated!" })
       }
     )
   },
