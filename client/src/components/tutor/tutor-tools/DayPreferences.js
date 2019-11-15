@@ -1,34 +1,36 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import axios from 'axios';
 
-const StudentType = ({curriculum, email, handleShowAlert}) => {
+const DayPreferences = ({daysAvailable, email, handleShowAlert}) => {
   const [state, setState] = useState({
-    FSF: false,
-    DV: false,
-    UXUI: false,
-    Cyber: false,
-    FinTech: false
+    Mondays: false,
+    Tuesdays: false,
+    Wednesdays: false,
+    Thursdays: false,
+    Fridays: false,
+    Saturdays: false,
+    Sundays: false
   });
 
   const handleChange = name => e => {
-    let newCurriculum = curriculum;
+    let newDaysAvailable = daysAvailable;
     if (e.target.checked === true) {
-      newCurriculum.push(name)
+      newDaysAvailable.push(name)
     } else {
-      let index = curriculum.indexOf(name)
-      newCurriculum.splice(index, 1)
+      let index = daysAvailable.indexOf(name)
+      newDaysAvailable.splice(index, 1)
     }
-    saveCurrics(newCurriculum)
+    saveDays(newDaysAvailable)
 
     setState({ ...state, [name]: e.target.checked });
   };
 
-  const saveCurrics = async (curriculum) => {
-    const response = await axios.put('api/account/curriculum', {
-      curriculum, email
+  const saveDays = async (daysAvailable) => {
+    const response = await axios.put('api/account/daysAvailable', {
+      daysAvailable, email
     })
     const msg = response.data
     handleShowAlert(msg)
@@ -38,7 +40,7 @@ const StudentType = ({curriculum, email, handleShowAlert}) => {
     let newState = state;
     
     const checkBoxes = Object.keys(state).map((key, i) => {
-      if (curriculum && curriculum.includes(key)) {
+      if (daysAvailable && daysAvailable.includes(key)) {
         newState[key] = true
       } else {
         newState[key] = false
@@ -55,15 +57,14 @@ const StudentType = ({curriculum, email, handleShowAlert}) => {
     return checkBoxes;
   }
 
-  return (
+  return(
     <div>
-      <h1>Student Type!</h1>
+      <h1>Days Available</h1>
       <FormGroup style={{ alignItems: 'center' }} row>
         {renderCheckboxes()}
       </FormGroup>
     </div >
-
   )
 }
 
-export default StudentType;
+export default DayPreferences;

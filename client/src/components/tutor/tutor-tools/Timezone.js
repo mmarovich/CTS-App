@@ -7,7 +7,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 
-const Timezone = ({email, savedTimezone}) => {
+const Timezone = ({email, savedTimezone, handleShowAlert}) => {
   const [timezone, setTimezone] = useState(savedTimezone);
   const [time, setTime] = useState(moment.tz(moment(), timezone).format('h:mm:ss A'));
 
@@ -41,7 +41,7 @@ const Timezone = ({email, savedTimezone}) => {
       email, timezone: newTimezone
     })
     const msg = response.data;
-    console.log(msg)
+    handleShowAlert(msg)
   }
 
   const handleChange = e => {

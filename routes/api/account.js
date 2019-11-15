@@ -18,6 +18,9 @@ router.route("/timezone")
 router.route("/curriculum")
   .put(accountController.updateCurriculum)
 
+router.route("/daysAvailable")
+  .put(accountController.updateDaysAvailable)
+
 router.route("/PTorFT")
   .put(accountController.updatePTorFT)
 

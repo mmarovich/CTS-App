@@ -1,8 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 
-const StudentsWanted = (props) => {
-  const {studentsWanted, email} = props;
+const StudentsWanted = ({studentsWanted, email, handleShowAlert}) => {
   const [field, setField] = useState("")
 
   useEffect(() => {
@@ -22,7 +21,7 @@ const StudentsWanted = (props) => {
     
     const msg = response.data;
 
-    console.log(msg)
+    handleShowAlert(msg)
   }
 
   return (

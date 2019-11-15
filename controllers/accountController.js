@@ -29,7 +29,6 @@ module.exports = {
   },
   updateTimezone: function (req, res) {
     const { email, timezone } = req.body;
-    console.log(email, timezone)
 
     db.User.findOneAndUpdate(
       { email },
@@ -40,7 +39,7 @@ module.exports = {
           console.log(err)
         }
 
-        res.send({ msg: "Timezone Updated!" })
+        res.send(`Timezone Updated to ${user.timezone}!`)
       }
     )
   },
@@ -56,7 +55,23 @@ module.exports = {
           console.log(err)
         }
 
-        res.send({ msg: "Curriculum Preferences Updated!" })
+        res.send("Curriculum Preferences Updated! We'll send you " + user.curriculum.join(', ').replace(/,(?!.*,)/gmi, ' and') + " students!")
+      }
+    )
+  },
+  updateDaysAvailable: async (req, res) => {
+    const { email, daysAvailable } = req.body;
+    const response = await db.User.findOneAndUpdate(
+      { email },
+      { $set: { daysAvailable } },
+      { new: true },
+      (err, user) => {
+        if (err) {
+          console.log(err)
+        }
+
+        console.log(user)
+        res.send("Saved!")
       }
     )
   },
@@ -140,12 +155,12 @@ module.exports = {
     res.send(newTutorInfo)
   },
   updateStudentsWanted: async (req, res) => {
-    const {email, studentsWanted} = req.body;
+    const { email, studentsWanted } = req.body;
     console.log(email);
     await db.User.findOneAndUpdate(
       { email },
       {
-        $set: {studentsWanted}
+        $set: { studentsWanted }
       },
       { new: true },
       (err, user) => {
@@ -154,8 +169,8 @@ module.exports = {
         }
 
         console.log(user)
-        res.json({ msg: `You now want ${user.studentsWanted} students!` })
+        res.send(`You now want ${user.studentsWanted} more students!`)
       }
-    ) 
+    )
   }
 }

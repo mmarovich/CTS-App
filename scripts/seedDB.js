@@ -57,8 +57,8 @@ const randomizeTimesAvailable = () => {
 }
 
 const dayOptions = [
-  "Monday", "Tuesday", "Wednesday", "Thursday",
-  "Friday", "Saturday", "Sunday"
+  "Mondays", "Tuesdays", "Wednesdays", "Thursdays",
+  "Fridays", "Saturdays", "Sundays"
 ]
 
 const randomizeDaysAvailable = () => {
