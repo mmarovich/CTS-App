@@ -1,34 +1,31 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import axios from 'axios';
 
-const StudentType = ({curriculum, email, handleShowAlert}) => {
+const PTorFT = ({ PTorFTstudents, email, handleShowAlert }) => {
   const [state, setState] = useState({
-    FSF: false,
-    DV: false,
-    UXUI: false,
-    Cyber: false,
-    FinTech: false
+    PT: false,
+    FT: false,
   });
 
   const handleChange = name => e => {
-    let newCurriculum = curriculum;
+    let newPTorFT = PTorFTstudents;
     if (e.target.checked === true) {
-      newCurriculum.push(name)
+      newPTorFT.push(name)
     } else {
-      let index = curriculum.indexOf(name)
-      newCurriculum.splice(index, 1)
+      let index = PTorFTstudents.indexOf(name)
+      newPTorFT.splice(index, 1)
     }
-    saveCurrics(newCurriculum)
+    savePTorFT(newPTorFT)
 
     setState({ ...state, [name]: e.target.checked });
   };
 
-  const saveCurrics = async (curriculum) => {
-    const response = await axios.put('api/account/curriculum', {
-      curriculum, email
+  const savePTorFT = async (PTorFTstudents) => {
+    const response = await axios.put('api/account/PTorFT', {
+      PTorFTstudents, email
     })
     const msg = response.data
     handleShowAlert(msg)
@@ -38,7 +35,7 @@ const StudentType = ({curriculum, email, handleShowAlert}) => {
     let newState = state;
     
     const checkBoxes = Object.keys(state).map((key, i) => {
-      if (curriculum && curriculum.includes(key)) {
+      if (PTorFTstudents && PTorFTstudents.includes(key)) {
         newState[key] = true
       } else {
         newState[key] = false
@@ -56,14 +53,14 @@ const StudentType = ({curriculum, email, handleShowAlert}) => {
   }
 
   return (
-    <div style={{padding: '0 10px 40px 10px'}}>
-      <h1>Student Type!</h1>
+    <div style={{ padding: '0 10px 40px 10px' }}>
+      <h2>Full-time or Part-time</h2>
       <FormGroup style={{ alignItems: 'center' }} row>
         {renderCheckboxes()}
       </FormGroup>
-    </div >
 
+    </div>
   )
 }
 
-export default StudentType;
+export default PTorFT;

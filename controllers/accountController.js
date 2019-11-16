@@ -103,8 +103,9 @@ module.exports = {
         }
 
         console.log(user)
-        res.status(400).json(
-          { msg: `We will assign you ${user.PTorFTstudents.join(" and ")} students!` })
+        res.send(user.PTorFTstudents.length === 0 ? 
+          `Please choose which students to receive...` :
+          `We will assign you ${user.PTorFTstudents.join(" and ")} students!`)
       }
     )
   },

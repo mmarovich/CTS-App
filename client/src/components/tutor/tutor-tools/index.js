@@ -4,6 +4,7 @@ import StudentType from './StudentType';
 import Timezone from './Timezone';
 import DayPreferences from './DayPreferences';
 import TimePreferences from './TimePreferences';
+import PTorFT from './PTorFT';
 
 export {
   MsgDisplay,
@@ -12,4 +13,5 @@ export {
   Timezone,
   DayPreferences,
   TimePreferences,
+  PTorFT
 }

@@ -4,7 +4,8 @@ import { connect } from "react-redux";
 
 import {
   MsgDisplay, StudentsWanted, StudentType,
-  Timezone, DayPreferences, TimePreferences
+  Timezone, DayPreferences, TimePreferences,
+  PTorFT
 } from './tutor-tools';
 import axios from 'axios';
 
@@ -62,41 +63,42 @@ const TutorPortal = (props) => {
                 <Col xs='12'>
                   <MsgDisplay showAlert={showAlert} msg={msg} />
                 </Col>
-              </Row>
-              <Row>
-                <Col xs='6'>
+                <Col xs='12' sm='6' lg='4'>
                   <StudentsWanted 
                     studentsWanted={tutor.studentsWanted || 0} 
                     email={tutor.email} 
                     handleShowAlert={handleShowAlert}
                   />
                 </Col>
-                <Col xs='6'>
+                <Col xs='12' sm='6' lg='4'>
                   <StudentType 
                     curriculum={tutor.curriculum} 
                     email={tutor.email} 
                     handleShowAlert={handleShowAlert}
                   />
                 </Col>
-              </Row>
-              <Row>
-                <Col xs='6'>
+                <Col xs='12' sm='6' lg='4'>
+                  <PTorFT 
+                    PTorFTstudents={tutor.PTorFTstudents} 
+                    email={tutor.email} 
+                    handleShowAlert={handleShowAlert}
+                  />
+                </Col>
+                <Col xs='12' sm='6' lg='4'>
                   <Timezone 
                     savedTimezone={timezone} 
                     email={email} 
                     handleShowAlert={handleShowAlert}
                   />
                 </Col>
-              </Row>
-              <Row>
-                <Col xs='6'>
+                <Col xs='12' sm='6' lg='4'>
                   <DayPreferences 
                     daysAvailable={daysAvailable} 
                     email={email} 
                     handleShowAlert={handleShowAlert}
                   />
                 </Col>
-                <Col xs='6'>
+                <Col xs='12' sm='6' lg='4'>
                   <TimePreferences 
                     timesAvailable={timesAvailable} 
                     email={email} 

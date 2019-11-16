@@ -47,7 +47,7 @@ const Timezone = ({email, savedTimezone, handleShowAlert}) => {
   };
 
   return (
-    <div>
+    <div style={{padding: '0 10px 40px 10px'}}>
       <h2>Timezone</h2>
 
       <FormControl style={{ width: '100%' }}>

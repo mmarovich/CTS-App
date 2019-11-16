@@ -25,7 +25,7 @@ const StudentsWanted = ({studentsWanted, email, handleShowAlert}) => {
   }
 
   return (
-    <div>
+    <div style={{padding: '0 10px 40px 10px'}}>
       <h2>Students Wanted!</h2>
 
         <input
