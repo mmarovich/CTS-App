@@ -14,13 +14,26 @@ module.exports = {
           lastAssigned: new Date()
         }
       },
-      {new: true},
+      { new: true },
       (err, user) => {
         if (err) {
           console.log(err)
         }
 
-        res.json({ msg: `Tutor is now in queue for ${user.studentsWanted}` })
+        if (user.studentsWanted < 1) {
+          db.User.findOneAndUpdate(
+            { email },
+            { $set: { accountStatus: "inactive" } },
+            { new: true },
+            (err, user) => {
+              if (err) {
+                console.log(err)
+              }
+              res.send(`Tutor is now ${user.accountStatus} at ${user.studentsWanted} students`)
+            })
+        } else {
+          res.send(`Tutor is now in queue for ${user.studentsWanted}`)
+        }
       }
     )
   },
@@ -28,7 +41,7 @@ module.exports = {
     const { email, studentsWanted } = req.body;
 
     if (studentsWanted <= 0) {
-      res.json({msg: 'Please set the number of students this tutor wants.'})
+      res.json({ msg: 'Please set the number of students this tutor wants.' })
     } else {
       db.User.findOne({ email }, (err, user) => {
         if (err) console.log(err);

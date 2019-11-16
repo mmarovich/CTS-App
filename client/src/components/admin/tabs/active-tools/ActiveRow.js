@@ -45,7 +45,7 @@ const ActiveRow = (props) => {
         <Button
           value={tutor.email}
           onClick={assignTutor}
-        >Activate</Button>
+        >Assign</Button>
       </Col>
       <Col xs='2'>
         <span data-tip data-for={`activeTT-${i}`} data-event='click focus'>
