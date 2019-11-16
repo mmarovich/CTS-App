@@ -35,7 +35,6 @@ const TutorPortal = (props) => {
   }, [tutor])
 
   const handleShowAlert = (newMsg) => {
-    console.log('hello')
     setMsg(newMsg)
     setShowAlert(true);
 

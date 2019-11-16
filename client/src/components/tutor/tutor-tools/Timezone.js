@@ -32,10 +32,6 @@ const Timezone = ({email, savedTimezone, handleShowAlert}) => {
     }
   }, [time])
 
-  useEffect(() => {
-    console.log(timezone)
-  }, [timezone])
-
   const saveTimezone = async(newTimezone) => {
     const response = await axios.put('api/account/timezone', {
       email, timezone: newTimezone

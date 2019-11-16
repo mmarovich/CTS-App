@@ -21,6 +21,9 @@ router.route("/curriculum")
 router.route("/daysAvailable")
   .put(accountController.updateDaysAvailable)
 
+router.route("/timesAvailable")
+  .put(accountController.updateTimesAvailable)
+
 router.route("/PTorFT")
   .put(accountController.updatePTorFT)
 

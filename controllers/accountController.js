@@ -71,7 +71,22 @@ module.exports = {
         }
 
         console.log(user)
-        res.send("Saved!")
+        res.send("Days Saved!")
+      }
+    )
+  },
+  updateTimesAvailable: async (req, res) => {
+    const { email, timesAvailable} = req.body;
+    const response = await db.User.findOneAndUpdate(
+      {email},
+      { $set: {timesAvailable}},
+      {new: true},
+      (err, user) => {
+        if (err) {
+          console.log(err)
+        }
+
+        res.send("Times Saved!")
       }
     )
   },
