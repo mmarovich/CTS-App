@@ -59,7 +59,7 @@ const DayPreferences = ({daysAvailable, email, handleShowAlert}) => {
 
   return(
     <div style={{padding: '0 10px 40px 10px'}}>
-      <h1>Days Available</h1>
+      <h6>Days Available</h6>
       <FormGroup style={{ alignItems: 'center' }} row>
         {renderCheckboxes()}
       </FormGroup>

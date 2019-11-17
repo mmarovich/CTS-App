@@ -54,7 +54,7 @@ const PTorFT = ({ PTorFTstudents, email, handleShowAlert }) => {
 
   return (
     <div style={{ padding: '0 10px 40px 10px' }}>
-      <h2>Full-time or Part-time</h2>
+      <h6>Would you like Full-time and/or Part-time students?</h6>
       <FormGroup style={{ alignItems: 'center' }} row>
         {renderCheckboxes()}
       </FormGroup>

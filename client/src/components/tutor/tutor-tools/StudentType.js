@@ -57,7 +57,7 @@ const StudentType = ({curriculum, email, handleShowAlert}) => {
 
   return (
     <div style={{padding: '0 10px 40px 10px'}}>
-      <h1>Student Type!</h1>
+      <h6>What curriculums do you feel confident tutoring?</h6>
       <FormGroup style={{ alignItems: 'center' }} row>
         {renderCheckboxes()}
       </FormGroup>

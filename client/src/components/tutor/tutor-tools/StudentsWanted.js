@@ -26,7 +26,7 @@ const StudentsWanted = ({studentsWanted, email, handleShowAlert}) => {
 
   return (
     <div style={{padding: '0 10px 40px 10px'}}>
-      <h2>Students Wanted!</h2>
+      <h6>How many <em>more</em> students do you want?</h6>
 
         <input
         value={field}

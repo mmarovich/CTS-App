@@ -65,7 +65,7 @@ const TimePreferences = ({timesAvailable, email, handleShowAlert}) => {
 
   return (
     <div style={{padding: '0 10px 40px 10px'}}>
-      <h1>Times Available</h1>
+      <h6>Times Available</h6>
       <FormGroup style={{ alignItems: 'center' }} row>
         {renderCheckboxes()}
       </FormGroup>

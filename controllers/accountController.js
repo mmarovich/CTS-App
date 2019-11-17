@@ -123,10 +123,9 @@ module.exports = {
           console.log(err)
         }
 
-        console.log(user)
-        res.send("If we find any students at " + 
+        res.send(user.Unis4InPerson.length !== 0 ? "If we find any students at " + 
         user.Unis4InPerson.join(', ').replace(/,(?!.*,)/gmi, ' or') +
-        " we'll send them your way!")
+        " we'll send them your way!" : "We won't send you any in-person requests.")
       }
     )
   },

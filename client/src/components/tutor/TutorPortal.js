@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Row, Col } from 'reactstrap';
 import { connect } from "react-redux";
+import { makeStyles } from '@material-ui/core/styles';
+import LinearProgress from '@material-ui/core/LinearProgress';
 
 import {
   MsgDisplay, StudentsWanted, StudentType,
@@ -41,22 +43,15 @@ const TutorPortal = (props) => {
 
     setTimeout(() => {
       setShowAlert(false);
-    }, 3000);
+    }, 5000);
   }
 
   const { email, timezone, daysAvailable, 
     timesAvailable, Unis4InPerson } = tutor;
   return (
     <div>
-      <h1>Tutor Portal!</h1>
       <div className="landing-copy col s12 center-align">
-        <h4>
-          <b>Hey there,</b> {user.firstName}
-          <p className="flow-text grey-text text-darken-1">
-            You are logged into a full-stack{" "}
-            <span style={{ fontFamily: "monospace" }}>MERN</span> app 👏
-              </p>
-        </h4>
+        <h4>Hi {user.firstName}!</h4>
         {
           !loading ?
             <div>
@@ -64,61 +59,61 @@ const TutorPortal = (props) => {
                 <Col xs='12'>
                   <MsgDisplay showAlert={showAlert} msg={msg} />
                 </Col>
-                <Col xs='12' sm='6' lg='4'>
+                <Col xs='12' sm='4' lg='3'>
                   <StudentsWanted 
                     studentsWanted={tutor.studentsWanted || 0} 
                     email={tutor.email} 
                     handleShowAlert={handleShowAlert}
                   />
                 </Col>
-                <Col xs='12' sm='6' lg='4'>
+                <Col xs='12' sm='4' lg='3'>
                   <StudentType 
                     curriculum={tutor.curriculum} 
                     email={tutor.email} 
                     handleShowAlert={handleShowAlert}
                   />
                 </Col>
-                <Col xs='12' sm='6' lg='4'>
+                <Col xs='12' sm='4' lg='3'>
                   <PTorFT 
                     PTorFTstudents={tutor.PTorFTstudents} 
                     email={tutor.email} 
                     handleShowAlert={handleShowAlert}
                   />
                 </Col>
-                <Col xs='12' sm='6' lg='4'>
+                <Col xs='12' sm='4' lg='3'>
                   <Timezone 
                     savedTimezone={timezone} 
                     email={email} 
                     handleShowAlert={handleShowAlert}
                   />
                 </Col>
-                <Col xs='12' sm='6' lg='4'>
-                  <DayPreferences 
-                    daysAvailable={daysAvailable} 
-                    email={email} 
-                    handleShowAlert={handleShowAlert}
-                  />
-                </Col>
-                <Col xs='12'>
-                  <TimePreferences 
-                    timesAvailable={timesAvailable} 
-                    email={email} 
-                    handleShowAlert={handleShowAlert}
-                  />
-                </Col>
-                <Col xs='12'>
+                <Col xs='12' sm='4' lg='3'>
                   <InPerson 
                     Unis4InPerson={Unis4InPerson} 
                     email={email}
                     handleShowAlert={handleShowAlert}
                 />
                 </Col>
+                <Col xs='12' sm='6'>
+                  <DayPreferences 
+                    daysAvailable={daysAvailable} 
+                    email={email} 
+                    handleShowAlert={handleShowAlert}
+                  />
+                </Col>
+                <Col xs='12' sm='6'>
+                  <TimePreferences 
+                    timesAvailable={timesAvailable} 
+                    email={email} 
+                    handleShowAlert={handleShowAlert}
+                  />
+                </Col>
               </Row>
             </div>
 
             :
 
-            <h2>Loading...</h2>
+            <LinearProgress />
         }
 
       </div>

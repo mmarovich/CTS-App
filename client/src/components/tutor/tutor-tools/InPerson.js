@@ -25,7 +25,6 @@ const InPerson = ({Unis4InPerson, email, handleShowAlert}) => {
   };
 
   const saveInPerson = async () => {
-    console.log(email)
     const response = await Axios.put("api/account/Unis4InPerson", {
       email, Unis4InPerson: universityName
     })
