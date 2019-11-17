@@ -125,16 +125,17 @@ module.exports = {
 
         res.send(user.Unis4InPerson.length !== 0 ? "If we find any students at " + 
         user.Unis4InPerson.join(', ').replace(/,(?!.*,)/gmi, ' or') +
-        " we'll send them your way!" : "We won't send you any in-person requests.")
+        " who want to be tutored in person, we'll send them your way!" : 
+        "We won't send you any in-person requests.")
       }
     )
   },
   updateEarly: function (req, res) {
-    const { email, earlyStudentsOnly } = req.body;
+    const { email, earlyStudents } = req.body;
 
     db.User.findOneAndUpdate(
       { email },
-      { $set: { earlyStudentsOnly } },
+      { $set: { earlyStudents } },
       { new: true },
       (err, user) => {
         if (err) {
@@ -142,8 +143,11 @@ module.exports = {
         }
 
         console.log(user)
-        res.status(400).json(
-          { msg: `We will assign you ${user.earlyStudentsOnly ? "early-course students only!" : "both early and late-course students!"}` })
+        const early = user.earlyStudents.includes("Early")
+        const notEarly = user.earlyStudents.includes("NotEarly")
+
+        res.send(user.earlyStudents.length !== 0 ? `We will send you ${user.earlyStudents.join(', ').replace(/,(?!.*,)/gmi, ' and')} students!` :
+          `Please choose whether you want early or non-early course students.`)
       }
     )
   },
@@ -185,6 +189,11 @@ module.exports = {
   getTutorInfo: async (req, res) => {
     const { email } = req.body;
     const tutorInfo = await db.User.findOne({ email })
+    if (!tutorInfo) {
+      let err = new Error(`It doesn't look like you have any tutors...`);
+        err.code = 404;
+        throw err;
+    }
 
     var newTutorInfo = _.omit(tutorInfo.toObject(), ['password']);
 

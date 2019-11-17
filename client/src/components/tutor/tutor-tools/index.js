@@ -6,6 +6,7 @@ import DayPreferences from './DayPreferences';
 import TimePreferences from './TimePreferences';
 import PTorFT from './PTorFT';
 import InPerson from './InPerson';
+import EarlyStudents from './EarlyStudents';
 
 export {
   MsgDisplay,
@@ -15,5 +16,6 @@ export {
   DayPreferences,
   TimePreferences,
   PTorFT,
-  InPerson
+  InPerson,
+  EarlyStudents
 }

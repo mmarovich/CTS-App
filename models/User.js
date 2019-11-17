@@ -59,9 +59,9 @@ const UserSchema = new Schema({
     type: [String],
     default: ["PT", "FT"]
   },
-  earlyStudentsOnly: {
-    type: Boolean,
-    default: false
+  earlyStudents: {
+    type: [String],
+    default: ["Early", "NonEarly"]
   },
   level: {
     type: String,

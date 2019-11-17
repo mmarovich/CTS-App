@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Row, Col } from 'reactstrap';
 import { connect } from "react-redux";
-import { makeStyles } from '@material-ui/core/styles';
 import LinearProgress from '@material-ui/core/LinearProgress';
 
 import {
   MsgDisplay, StudentsWanted, StudentType,
   Timezone, DayPreferences, TimePreferences,
-  PTorFT, InPerson
+  PTorFT, InPerson, EarlyStudents
 } from './tutor-tools';
 import axios from 'axios';
 
@@ -47,7 +46,7 @@ const TutorPortal = (props) => {
   }
 
   const { email, timezone, daysAvailable, 
-    timesAvailable, Unis4InPerson } = tutor;
+    timesAvailable, Unis4InPerson, earlyStudents } = tutor;
   return (
     <div>
       <div className="landing-copy col s12 center-align">
@@ -76,7 +75,14 @@ const TutorPortal = (props) => {
                 <Col xs='12' sm='4' lg='3'>
                   <PTorFT 
                     PTorFTstudents={tutor.PTorFTstudents} 
-                    email={tutor.email} 
+                    email={email} 
+                    handleShowAlert={handleShowAlert}
+                  />
+                </Col>
+                <Col xs='12' sm='4' lg='3'>
+                  <EarlyStudents 
+                    earlyStudents={earlyStudents} 
+                    email={email} 
                     handleShowAlert={handleShowAlert}
                   />
                 </Col>
