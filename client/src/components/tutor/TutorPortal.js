@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import {
   MsgDisplay, StudentsWanted, StudentType,
   Timezone, DayPreferences, TimePreferences,
-  PTorFT
+  PTorFT, InPerson
 } from './tutor-tools';
 import axios from 'axios';
 
@@ -44,7 +44,8 @@ const TutorPortal = (props) => {
     }, 3000);
   }
 
-  const { email, timezone, daysAvailable, timesAvailable } = tutor;
+  const { email, timezone, daysAvailable, 
+    timesAvailable, Unis4InPerson } = tutor;
   return (
     <div>
       <h1>Tutor Portal!</h1>
@@ -59,7 +60,7 @@ const TutorPortal = (props) => {
         {
           !loading ?
             <div>
-              <Row>
+              <Row style={{display: 'flex', justifyContent: 'space-between'}}>
                 <Col xs='12'>
                   <MsgDisplay showAlert={showAlert} msg={msg} />
                 </Col>
@@ -98,12 +99,19 @@ const TutorPortal = (props) => {
                     handleShowAlert={handleShowAlert}
                   />
                 </Col>
-                <Col xs='12' sm='6' lg='4'>
+                <Col xs='12'>
                   <TimePreferences 
                     timesAvailable={timesAvailable} 
                     email={email} 
                     handleShowAlert={handleShowAlert}
                   />
+                </Col>
+                <Col xs='12'>
+                  <InPerson 
+                    Unis4InPerson={Unis4InPerson} 
+                    email={email}
+                    handleShowAlert={handleShowAlert}
+                />
                 </Col>
               </Row>
             </div>

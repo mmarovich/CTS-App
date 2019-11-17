@@ -109,6 +109,27 @@ module.exports = {
       }
     )
   },
+  updateUnis4InPerson: async(req, res) => {
+    const { email, Unis4InPerson } = req.body;
+
+    await db.User.findOneAndUpdate(
+      { email },
+      {
+        $set: { Unis4InPerson }
+      },
+      { new: true },
+      (err, user) => {
+        if (err) {
+          console.log(err)
+        }
+
+        console.log(user)
+        res.send("If we find any students at " + 
+        user.Unis4InPerson.join(', ').replace(/,(?!.*,)/gmi, ' or') +
+        " we'll send them your way!")
+      }
+    )
+  },
   updateEarly: function (req, res) {
     const { email, earlyStudentsOnly } = req.body;
 

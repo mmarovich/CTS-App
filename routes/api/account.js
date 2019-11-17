@@ -27,6 +27,9 @@ router.route("/timesAvailable")
 router.route("/PTorFT")
   .put(accountController.updatePTorFT)
 
+router.route("/Unis4InPerson")
+  .put(accountController.updateUnis4InPerson)
+
 router.route("/earlyStudents")
   .put(accountController.updateEarly)
 

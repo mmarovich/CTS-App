@@ -5,6 +5,7 @@ import Timezone from './Timezone';
 import DayPreferences from './DayPreferences';
 import TimePreferences from './TimePreferences';
 import PTorFT from './PTorFT';
+import InPerson from './InPerson';
 
 export {
   MsgDisplay,
@@ -13,5 +14,6 @@ export {
   Timezone,
   DayPreferences,
   TimePreferences,
-  PTorFT
+  PTorFT,
+  InPerson
 }
