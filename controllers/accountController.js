@@ -182,7 +182,8 @@ module.exports = {
         }
 
         console.log(user)
-        res.status(400).json({ msg: `Languages updated. You speak ${user.languages.join(', ').replace(/,(?!.*,)/gmi, ' and')}!` })
+        res.send(user.languages.length > 0 ? `We'll send you students that also speak ${user.languages.join(', ').replace(/,(?!.*,)/gmi, ' and')}!` :
+          `We'll only send you students that speak English`)
       }
     )
   },

@@ -7,6 +7,7 @@ import TimePreferences from './TimePreferences';
 import PTorFT from './PTorFT';
 import InPerson from './InPerson';
 import EarlyStudents from './EarlyStudents';
+import Languages from './Languages';
 
 export {
   MsgDisplay,
@@ -17,5 +18,6 @@ export {
   TimePreferences,
   PTorFT,
   InPerson,
-  EarlyStudents
+  EarlyStudents,
+  Languages
 }

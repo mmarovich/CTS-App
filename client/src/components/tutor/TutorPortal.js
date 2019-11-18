@@ -6,7 +6,7 @@ import LinearProgress from '@material-ui/core/LinearProgress';
 import {
   MsgDisplay, StudentsWanted, StudentType,
   Timezone, DayPreferences, TimePreferences,
-  PTorFT, InPerson, EarlyStudents
+  PTorFT, InPerson, EarlyStudents, Languages
 } from './tutor-tools';
 import axios from 'axios';
 
@@ -42,15 +42,25 @@ const TutorPortal = (props) => {
 
     setTimeout(() => {
       setShowAlert(false);
-    }, 5000);
+    }, 4000);
   }
 
   const { email, timezone, daysAvailable, 
-    timesAvailable, Unis4InPerson, earlyStudents } = tutor;
+    timesAvailable, Unis4InPerson, earlyStudents, languages } = tutor;
   return (
     <div>
       <div className="landing-copy col s12 center-align">
-        <h4>Hi {user.firstName}!</h4>
+        <Row>
+          <Col xs='12' sm='4'>
+            <p style={{textAlign: 'left'}}>Hi {user.firstName}!</p>
+          </Col>
+          <Col xs='12' sm='4'>
+            <p><strong>Status:</strong> {user.accountStatus}</p>
+          </Col>
+          <Col xs='12' sm='4'>
+            <p><strong>Level:</strong> {user.level}</p>
+          </Col>
+        </Row>
         {
           !loading ?
             <div>
@@ -82,6 +92,13 @@ const TutorPortal = (props) => {
                 <Col xs='12' sm='4' lg='3'>
                   <EarlyStudents 
                     earlyStudents={earlyStudents} 
+                    email={email} 
+                    handleShowAlert={handleShowAlert}
+                  />
+                </Col>
+                <Col xs='12' sm='4' lg='3'>
+                  <Languages 
+                    languages={languages} 
                     email={email} 
                     handleShowAlert={handleShowAlert}
                   />
