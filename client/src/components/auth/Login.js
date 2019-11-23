@@ -5,6 +5,8 @@ import { connect } from "react-redux";
 import { loginUser } from "../../actions/authActions";
 import classnames from "classnames";
 
+import Grid from '@material-ui/core/Grid';
+
 class Login extends Component {
   constructor() {
     super();
@@ -53,9 +55,8 @@ class Login extends Component {
     const { errors } = this.state;
 
     return (
-      <div className="container">
-        <div style={{ marginTop: "4rem" }} className="row">
-          <div className="col s8 offset-s2">
+        <Grid container style={{ marginTop: "4rem" }}>
+          <Grid sm={8} justify='center'>
             <Link to="/" className="btn-flat waves-effect">
               <i className="material-icons left">keyboard_backspace</i> Back to
               home
@@ -118,9 +119,8 @@ class Login extends Component {
                 </button>
               </div>
             </form>
-          </div>
-        </div>
-      </div>
+          </Grid>
+        </Grid>
     );
   }
 }

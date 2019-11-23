@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import { Row, Col } from 'reactstrap';
+import Grid from '@material-ui/core/Grid';
 import axios from 'axios';
 
 import ResignedList from './resigned-tools/ResignedList';
@@ -36,19 +36,19 @@ const Resigned = (props) => {
 
   return (
     <div>
-      <Row>
-        <Col xs={6}>
+      <Grid container>
+        <Grid item xs={6}>
           <input
             type="text"
             placeholder="Search..."
             value={searchField}
             onChange={(e) => handleSearch(e)}
           />
-        </Col>
-        <Col xs={6}>
+        </Grid>
+        <Grid item xs={6}>
 
-        </Col>
-      </Row>
+        </Grid>
+      </Grid>
       <ResignedList resignedTutors={filteredTutors ? filteredTutors : resignedTutors} />
     </div>
   )

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Row, Col } from 'reactstrap';
+import Grid from '@material-ui/core/Grid';
 import { connect } from "react-redux";
 import LinearProgress from '@material-ui/core/LinearProgress';
 
@@ -50,88 +50,88 @@ const TutorPortal = (props) => {
   return (
     <div>
       <div className="landing-copy col s12 center-align">
-        <Row>
-          <Col xs='12' sm='4'>
+        <Grid container>
+          <Grid item xs={12} sm={4}>
             <p style={{textAlign: 'left'}}>Hi {user.firstName}!</p>
-          </Col>
-          <Col xs='12' sm='4'>
+          </Grid>
+          <Grid item xs={12} sm={4}>
             <p><strong>Status:</strong> {user.accountStatus}</p>
-          </Col>
-          <Col xs='12' sm='4'>
+          </Grid>
+          <Grid item xs={12} sm={4}>
             <p><strong>Level:</strong> {user.level}</p>
-          </Col>
-        </Row>
+          </Grid>
+        </Grid>
         {
           !loading ?
             <div>
-              <Row style={{display: 'flex', justifyContent: 'space-between'}}>
-                <Col xs='12'>
+              <Grid container style={{display: 'flex', justifyContent: 'space-between'}}>
+                <Grid item xs={12}>
                   <MsgDisplay showAlert={showAlert} msg={msg} />
-                </Col>
-                <Col xs='12' sm='4' lg='3'>
+                </Grid>
+                <Grid item xs={12} sm={4} lg={3}>
                   <StudentsWanted 
                     studentsWanted={tutor.studentsWanted || 0} 
                     email={tutor.email} 
                     handleShowAlert={handleShowAlert}
                   />
-                </Col>
-                <Col xs='12' sm='4' lg='3'>
+                </Grid>
+                <Grid item xs={12} sm={4} lg={3}>
                   <StudentType 
                     curriculum={tutor.curriculum} 
                     email={tutor.email} 
                     handleShowAlert={handleShowAlert}
                   />
-                </Col>
-                <Col xs='12' sm='4' lg='3'>
+                </Grid>
+                <Grid item xs={12} sm={4} lg={3}>
                   <PTorFT 
                     PTorFTstudents={tutor.PTorFTstudents} 
                     email={email} 
                     handleShowAlert={handleShowAlert}
                   />
-                </Col>
-                <Col xs='12' sm='4' lg='3'>
+                </Grid>
+                <Grid item xs={12} sm={4} lg={3}>
                   <EarlyStudents 
                     earlyStudents={earlyStudents} 
                     email={email} 
                     handleShowAlert={handleShowAlert}
                   />
-                </Col>
-                <Col xs='12' sm='4' lg='3'>
+                </Grid>
+                <Grid item xs={12} sm={4} lg={3}>
                   <Languages 
                     languages={languages} 
                     email={email} 
                     handleShowAlert={handleShowAlert}
                   />
-                </Col>
-                <Col xs='12' sm='4' lg='3'>
+                </Grid>
+                <Grid item xs={12} sm={4} lg={3}>
                   <Timezone 
                     savedTimezone={timezone} 
                     email={email} 
                     handleShowAlert={handleShowAlert}
                   />
-                </Col>
-                <Col xs='12' sm='4' lg='3'>
+                </Grid>
+                <Grid item xs={12} sm={4} lg={3}>
                   <InPerson 
                     Unis4InPerson={Unis4InPerson} 
                     email={email}
                     handleShowAlert={handleShowAlert}
                 />
-                </Col>
-                <Col xs='12' sm='6'>
+                </Grid>
+                <Grid item xs={12} sm={6}>
                   <DayPreferences 
                     daysAvailable={daysAvailable} 
                     email={email} 
                     handleShowAlert={handleShowAlert}
                   />
-                </Col>
-                <Col xs='12' sm='6'>
+                </Grid>
+                <Grid item xs={12} sm={6}>
                   <TimePreferences 
                     timesAvailable={timesAvailable} 
                     email={email} 
                     handleShowAlert={handleShowAlert}
                   />
-                </Col>
-              </Row>
+                </Grid>
+              </Grid>
             </div>
 
             :

@@ -1,10 +1,10 @@
 import React, {useState, useEffect} from "react";
-import { Row, Col } from 'reactstrap';
+import Grid from '@material-ui/core/Grid';
 import axios from 'axios';
 
 import OnholdList from './onhold-tools/OnholdList';
 
-const OnHold = (props) => {
+const OnHold = () => {
   const [onHoldTutors, setOnHoldTutors] = useState();
   const [searchField, setSearchField] = useState("");
   const [filteredTutors, setFilteredTutors] = useState();
@@ -37,19 +37,19 @@ const OnHold = (props) => {
 
   return (
     <div>
-      <Row>
-        <Col xs={6}>
+      <Grid container>
+        <Grid item xs={6}>
           <input
             type="text"
             placeholder="Search..."
             value={searchField}
             onChange={(e) => handleSearch(e)}
           />
-        </Col>
-        <Col xs={6}>
+        </Grid>
+        <Grid item xs={6}>
 
-        </Col>
-      </Row>
+        </Grid>
+      </Grid>
       <OnholdList onHoldTutors={filteredTutors ? filteredTutors : onHoldTutors} getOnHoldTutors={getOnHoldTutors} />
     </div>
   )

@@ -5,6 +5,11 @@ import { connect } from "react-redux";
 import { registerUser } from "../../actions/authActions";
 import classnames from "classnames";
 
+import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
+import KeyboardBackspaceRoundedIcon from '@material-ui/icons/KeyboardBackspaceRounded';
+import TextField from '@material-ui/core/TextField';
+
 class Register extends Component {
   constructor() {
     super();
@@ -55,110 +60,114 @@ class Register extends Component {
     const { errors } = this.state;
 
     return (
-      <div className="container">
-        <div className="row">
-          <div className="col s8 offset-s2">
+      <Grid container style={{ height: "75vh" }} justify="center" alignItems="center" >
+        <Grid item xs={10} sm={6} container>
+          <Grid item>
             <Link to="/" className="btn-flat waves-effect">
-              <i className="material-icons left">keyboard_backspace</i> Back to
+              <KeyboardBackspaceRoundedIcon style={{ fontSize: 40 }} />Back to
               home
             </Link>
-            <div className="col s12" style={{ paddingLeft: "11.250px" }}>
-              <h4>
+          </Grid>
+          <Grid item xs={12} container justify="center" style={{ paddingLeft: "11.250px" }}>
+            <Grid item xs={12} container justify="center">
+              <h4 style={{ margin: 0 }}>
                 <b>Register</b> below
               </h4>
+            </Grid>
+            <Grid item xs={12} container justify="center" >
               <p className="grey-text text-darken-1">
                 Already have an account? <Link to="/login">Log in</Link>
               </p>
-            </div>
-            <form noValidate onSubmit={this.onSubmit}>
-              <div className="input-field col s12">
-                <input
-                  onChange={this.onChange}
-                  value={this.state.firstName}
-                  error={errors.firstName}
+            </Grid>
+          </Grid>
+          <Grid item container>
+            <form noValidate onSubmit={this.onSubmit} style={{ width: "100%" }}>
+              <div>
+                <TextField
+                  style={{ width: "100%" }}
                   id="firstName"
-                  type="text"
                   className={classnames("", {
                     invalid: errors.firstName
                   })}
+                  label="First Name"
+                  onChange={this.onChange}
+                  value={this.state.firstName}
+                  error={errors.firstName}
                 />
-                <label htmlFor="firstName">First Name</label>
                 <span className="red-text">{errors.firstName}</span>
               </div>
-              <div className="input-field col s12">
-                <input
-                  onChange={this.onChange}
-                  value={this.state.lastName}
-                  error={errors.lastName}
+              <div>
+                <TextField
+                  style={{ width: "100%" }}
                   id="lastName"
-                  type="text"
                   className={classnames("", {
                     invalid: errors.lastName
                   })}
+                  label="Last Name"
+                  onChange={this.onChange}
+                  value={this.state.lastName}
+                  error={errors.lastName}
                 />
-                <label htmlFor="lastName">Last Name</label>
                 <span className="red-text">{errors.lastName}</span>
               </div>
-              <div className="input-field col s12">
-                <input
-                  onChange={this.onChange}
-                  value={this.state.email}
-                  error={errors.email}
+              <div>
+                <TextField
+                  style={{ width: "100%" }}
                   id="email"
-                  type="email"
                   className={classnames("", {
                     invalid: errors.email
                   })}
+                  label="Email"
+                  onChange={this.onChange}
+                  value={this.state.email}
+                  error={errors.email}
                 />
-                <label htmlFor="email">Email</label>
                 <span className="red-text">{errors.email}</span>
               </div>
-              <div className="input-field col s12">
-                <input
-                  onChange={this.onChange}
-                  value={this.state.password}
-                  error={errors.password}
+              <div>
+                <TextField
+                  style={{ width: "100%" }}
                   id="password"
                   type="password"
                   className={classnames("", {
                     invalid: errors.password
                   })}
+                  label="Password"
+                  onChange={this.onChange}
+                  value={this.state.password}
+                  error={errors.password}
                 />
-                <label htmlFor="password">Password</label>
                 <span className="red-text">{errors.password}</span>
               </div>
-              <div className="input-field col s12">
-                <input
-                  onChange={this.onChange}
-                  value={this.state.password2}
-                  error={errors.password2}
+              <div>
+                <TextField
+                  style={{ width: "100%" }}
                   id="password2"
                   type="password"
                   className={classnames("", {
                     invalid: errors.password2
                   })}
+                  label="Confirm Password"
+                  onChange={this.onChange}
+                  value={this.state.password2}
+                  error={errors.password2}
                 />
-                <label htmlFor="password2">Confirm Password</label>
                 <span className="red-text">{errors.password2}</span>
               </div>
-              <div className="col s12" style={{ paddingLeft: "11.250px" }}>
-                <button
-                  style={{
-                    width: "150px",
-                    borderRadius: "3px",
-                    letterSpacing: "1.5px",
-                    marginTop: "1rem"
-                  }}
+              <Grid item xs={12} container justify="center" style={{marginTop: 10}}>
+                <Button
+                  variant="contained"
+                  color="primary"
                   type="submit"
                   className="btn btn-large waves-effect waves-light hoverable blue accent-3"
                 >
                   Sign up
-                </button>
-              </div>
+                </Button>
+              </Grid>
             </form>
-          </div>
-        </div>
-      </div>
+          </Grid>
+        </Grid>
+      </Grid >
     );
   }
 }

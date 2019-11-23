@@ -12,7 +12,8 @@ import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import PrivateRoute from "./components/private-route/PrivateRoute";
 import Dashboard from "./components/dashboard/Dashboard";
-import {Main, OnHold, Active, Inactive, Resigned} from "./components/admin/tabs"
+import {Main, OnHold, Active, Inactive, Resigned} from "./components/admin/tabs";
+import SubmitFeedback from './components/tutor/SubmitFeedback';
 
 
 import "./App.css";
@@ -45,6 +46,7 @@ class App extends Component {
             <Route exact path="/" component={Landing} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
+            <Route exact path="/student-feedback" component={SubmitFeedback} />
             <Switch>
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
               <PrivateRoute exact path="/main" component={Main} />

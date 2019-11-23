@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Row, Col } from 'reactstrap';
+import Grid from '@material-ui/core/Grid';
 
 import { Info, TutorList } from './main-tools';
 import axios from "axios";
@@ -12,21 +12,21 @@ const Main = (props) => {
   const getAllTutors = async () => {
     let response = await axios.get("api/admin/tutors");
     const tutors = response.data;
-    
+
     setAllTutors(tutors);
   }
 
   const handleSearch = (e) => {
     const query = e.target.value;
     setSearchField(query);
-    
+
     const q = query.toLowerCase();
     const newTutors = allTutors.filter((tutor) => {
-      return Object.values(tutor).some( val => 
-        String(val).toLowerCase().includes(q) 
+      return Object.values(tutor).some(val =>
+        String(val).toLowerCase().includes(q)
       );
     })
-    
+
     setFilteredTutors(newTutors);
 
   }
@@ -37,29 +37,29 @@ const Main = (props) => {
 
   return (
     <div>
-      <Row>
-        <Col xs={6}>
+      <Grid container spacing={3}>
+        <Grid item xs={6}>
 
-        </Col>
-        <Col xs={6}>
+        </Grid>
+        <Grid item xs={6}>
           <Info allTutors={filteredTutors ? filteredTutors : allTutors} />
-        </Col>
-      </Row>
-      <Row>
-        <Col xs={6}>
+        </Grid>
+      </Grid>
+      <Grid container spacing={3}>
+        <Grid item xs={6}>
           <input
             type="text"
             placeholder="Search..."
             value={searchField}
             onChange={(e) => handleSearch(e)}
           />
-        </Col>
-        <Col xs={6}>
+        </Grid>
+        <Grid item xs={6}>
 
-        </Col>
-      </Row>
-      <TutorList allTutors={filteredTutors ? filteredTutors : allTutors} />
-    </div>
+        </Grid>
+      </Grid>
+    <TutorList allTutors={filteredTutors ? filteredTutors : allTutors} />
+    </div >
   )
 }
 

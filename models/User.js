@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+const moment = require('moment')
 
 // Create Schema
 const UserSchema = new Schema({
@@ -45,7 +46,7 @@ const UserSchema = new Schema({
   },
   lastAssigned: {
     type: Date,
-    default: null
+    default: moment().add(1, 'week')
   },
   studentsWanted: {
     type: Number,
@@ -87,7 +88,11 @@ const UserSchema = new Schema({
     type: [String],
     default: []
   },
-  date: {
+  feedback: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Feedback'
+  }]
+,  date: {
     type: Date,
     default: Date.now
   }

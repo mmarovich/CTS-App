@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Row, Col, Button } from 'reactstrap';
+import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
 import axios from 'axios';
 
 import ActiveList from './active-tools/ActiveList';
@@ -17,7 +18,10 @@ const Active = (props) => {
   }
 
   const handleSearch = (e) => {
-    const { id, value } = e.target
+    const { value, id } = e.currentTarget;
+    console.log(e.currentTarget)
+    console.log(value)
+    console.log(id)
     if (id === "search" || id === "reset") {
       setSearchField(value);
 
@@ -45,55 +49,60 @@ const Active = (props) => {
 
   return (
     <div>
-      <Row>
-        <Col xs={6}>
+      <Grid container>
+        <Grid item xs={6}>
           <input
             type="text"
-            id="search"
+            className="search"
             placeholder="Search..."
             value={searchField}
             onChange={(e) => handleSearch(e)}
           />
-        </Col>
-        <Col xs={6} style={{display: 'flex', justifyContent: 'space-between'}}>
+        </Grid>
+        <Grid item xs={6} style={{display: 'flex', justifyContent: 'space-between'}}>
           <Button
-            outline
-            color="secondary"
-            id="FSF"
+            variant='outlined'
+            color="primary"
+            id="search"
+            value="FSF"
             onClick={(e) => handleSearch(e)}
           >FSF</Button>
           <Button
-            outline
-            color="secondary"
-            id="DV"
+            variant='outlined'
+            color="primary"
+            id="search"
+            value="DV"
             onClick={(e) => handleSearch(e)}
           >DataViz</Button>
           <Button
-            outline
-            color="secondary"
-            id="Cyber"
+            variant='outlined'
+            color="primary"
+            id="search"
+            value="Cyber"
             onClick={(e) => handleSearch(e)}
           >Cyber</Button>
           <Button
-            outline
-            color="secondary"
-            id="UXUI"
+            variant='outlined'
+            color="primary"
+            id="search"
+            value="UXUI"
             onClick={(e) => handleSearch(e)}
           >UX/UI</Button>
           <Button
-            outline
-            color="secondary"
-            id="FinTech"
+            variant='outlined'
+            color="primary"
+            id="search"
+            value="FinTech"
             onClick={(e) => handleSearch(e)}
           >FinTech</Button>
           <Button
-            outline
-            color="secondary"
+            variant='outlined'
+            color="primary"
             id="reset"
             onClick={(e) => handleSearch(e)}
           >Reset</Button>
-        </Col>
-      </Row>
+        </Grid>
+      </Grid>
       <ActiveList activeTutors={filteredTutors ? filteredTutors : activeTutors} getActiveTutors={getActiveTutors}/>
     </div>
   )

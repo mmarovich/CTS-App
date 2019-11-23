@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Col } from 'reactstrap';
+import Grid from '@material-ui/core/Grid';
 
 import InactiveRow from './InactiveRow';
 
@@ -17,13 +17,13 @@ const InactiveList = (props) => {
 
   return (
     <div>
-      <Row style={styles.headerStyles}>
-        <Col xs='2'>Name</Col>
-        <Col xs='2'>Email</Col>
-        <Col xs='2'>Timezone</Col>
-        <Col xs='2'>Last Assigned</Col>
-        <Col xs='2'>Wanted</Col>
-      </Row>
+      <Grid container style={styles.headerStyles}>
+        <Grid item xs={2}>Name</Grid>
+        <Grid item xs={2}>Email</Grid>
+        <Grid item xs={2}>Timezone</Grid>
+        <Grid item xs={2}>Last Assigned</Grid>
+        <Grid item xs={2}>Wanted</Grid>
+      </Grid>
       {renderTutors()}
     </div>
   )

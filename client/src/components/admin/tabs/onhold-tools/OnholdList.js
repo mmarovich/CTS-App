@@ -1,6 +1,8 @@
 import React from 'react';
 import axios from 'axios';
-import { Row, Col, Button } from 'reactstrap';
+import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
+
 import ReactTooltip from 'react-tooltip'
 
 const OnholdList = (props) => {
@@ -18,26 +20,26 @@ const OnholdList = (props) => {
   const renderTutors = () => {
     if (props.onHoldTutors) {
       return props.onHoldTutors.map((tutor, i) => {
-        return <Row style={styles.rowFont} key={i}>
-          <Col xs='2'>{tutor.queueNum}</Col>
-          <Col xs='2'>
+        return <Grid container style={styles.rowFont} key={i}>
+          <Grid item xs={2}>{tutor.queueNum}</Grid>
+          <Grid item xs={2}>
             <span data-tip data-for={`holdTT-${i}`} data-event='click focus'>
               {`${tutor.firstName} 
               ${tutor.nickName ? `(${tutor.nickName})` : ''}
               ${tutor.middleName ? tutor.middleName : ''}
               ${tutor.lastName}`}
             </span>
-          </Col>
-          <Col xs='2'>{tutor.email}</Col>
-          <Col xs='2'>{tutor.timezone}</Col>
-          <Col xs='2'>{tutor.studentsWanted}</Col>
-          <Col xs='1'>
+          </Grid>
+          <Grid item xs={2}>{tutor.email}</Grid>
+          <Grid item xs={2}>{tutor.timezone}</Grid>
+          <Grid item xs={2}>{tutor.studentsWanted}</Grid>
+          <Grid item xs={1}>
             <Button 
+              variant="contained"
               color="primary" 
-              size="sm"
               onClick={() => takeOffHold(tutor.email)}
             >Activate</Button>
-          </Col>
+          </Grid>
           <ReactTooltip
             globalEventOff='click'
             id={`holdTT-${i}`}
@@ -46,13 +48,13 @@ const OnholdList = (props) => {
             <ul>
               {tutor.earlyStudentsOnly ? <li>EARLY STUDENTS ONLY</li> : null}
               <li><b>Wants</b> {tutor.PTorFTstudents.join(', ').replace(/,(?!.*,)/gmi, ' and')} students, for {tutor.curriculum.join(', ').replace(/,(?!.*,)/gmi, ' and')}</li>
-              <li><b>Can Teach In-Person:</b> {tutor.Unis4InPerson.length ? tutor.Unis4InPersonjoin(', ').replace(/,(?!.*,)/gmi, ' and') : 'No'}</li>
+              <li><b>Can Teach In-Person:</b> {tutor.Unis4InPerson.length ? tutor.Unis4InPerson.join(', ').replace(/,(?!.*,)/gmi, ' and') : 'No'}</li>
               <li><b>Native English: {tutor.nativeEnglish ? 'Yes' : 'No'}</b></li>
               <li><b>Languages: {tutor.languages.length ? tutor.languages.join(', ').replace(/,(?!.*,)/gmi, ' and') : 'None'}</b></li>
             </ul>
 
           </ReactTooltip>
-        </Row>
+        </Grid>
       })
     } else {
       return;
@@ -61,13 +63,13 @@ const OnholdList = (props) => {
 
   return (
     <div>
-      <Row style={styles.headerStyles}>
-        <Col xs='2'>Queue</Col>
-        <Col xs='2'>Name</Col>
-        <Col xs='2'>Email</Col>
-        <Col xs='2'>Timezone</Col>
-        <Col xs='2'>Wanted</Col>
-      </Row>
+      <Grid container style={styles.headerStyles}>
+        <Grid item xs={2}>Queue</Grid>
+        <Grid item xs={2}>Name</Grid>
+        <Grid item xs={2}>Email</Grid>
+        <Grid item xs={2}>Timezone</Grid>
+        <Grid item xs={2}>Wanted</Grid>
+      </Grid>
       {renderTutors()}
     </div>
   )

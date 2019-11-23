@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Row, Col } from 'reactstrap';
+import React, { useState, useEffect } from 'react';
+import Grid from '@material-ui/core/Grid';
 import ReactTooltip from 'react-tooltip';
 import axios from 'axios';
 import moment from 'moment-timezone';
@@ -7,11 +7,18 @@ import moment from 'moment-timezone';
 const InactiveRow = (props) => {
   const { tutor, id } = props;
   const {studentsWanted, email} = props.tutor;
-  const [wanted, setWanted] = useState(studentsWanted)
+  const [wanted, setWanted] = useState('');
+  const [changed, setChanged] = useState()
 
   const handleChange = (e) => {
+    setChanged(true)
     setWanted(e.target.value)
   }
+
+  useEffect(() => {
+    setChanged(false)
+    setWanted(studentsWanted)
+  }, [])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -46,28 +53,28 @@ const InactiveRow = (props) => {
   }
 
   return (
-    <Row style={styles.rowFont}>
-      <Col xs='2'>
+    <Grid container style={styles.rowFont}>
+      <Grid item xs={2}>
         <span data-tip data-for={`inactiveTT-${id}`} data-event='click focus'>
           {`${tutor.firstName} 
               ${tutor.nickName ? `(${tutor.nickName})` : ''}
               ${tutor.middleName ? tutor.middleName : ''}
               ${tutor.lastName}`}
         </span>
-      </Col>
-      <Col xs='2'>{tutor.email}</Col>
-      <Col xs='2'>{tutor.timezone}</Col>
-      <Col xs='2'>{moment(tutor.lastAssigned).format('M/D/YY')}</Col>
-      <Col xs='1'>
+      </Grid>
+      <Grid item xs={2}>{tutor.email}</Grid>
+      <Grid item xs={2}>{tutor.timezone}</Grid>
+      <Grid item xs={2}>{moment(tutor.lastAssigned).format('M/D/YY')}</Grid>
+      <Grid item xs={1}>
           <input
             type='text'
-            value={wanted}
+            value={changed ? wanted : studentsWanted}
             onChange={(e) => handleChange(e)}
           />
-      </Col>
-      <Col xs='1'>
+      </Grid>
+      <Grid item xs={1}>
           <button type="submit" onClick={handleSubmit}>Throw In!</button>
-      </Col>
+      </Grid>
       <ReactTooltip
         globalEventOff='click'
         id={`inactiveTT-${id}`}
@@ -76,7 +83,7 @@ const InactiveRow = (props) => {
         <ul>
           {tutor.earlyStudentsOnly ? <li>EARLY STUDENTS ONLY</li> : null}
           <li><b>Wants</b> {tutor.PTorFTstudents.join(', ').replace(/,(?!.*,)/gmi, ' and')} students, for {tutor.curriculum.join(', ').replace(/,(?!.*,)/gmi, ' and')}</li>
-          <li><b>Can Teach In-Person:</b> {tutor.Unis4InPerson.length ? tutor.Unis4InPersonjoin(', ').replace(/,(?!.*,)/gmi, ' and') : 'No'}</li>
+          <li><b>Can Teach In-Person:</b> {tutor.Unis4InPerson.length ? tutor.Unis4InPerson.join(', ').replace(/,(?!.*,)/gmi, ' and') : 'No'}</li>
           <li><b>Native English: {tutor.nativeEnglish ? 'Yes' : 'No'}</b></li>
           <li><b>Languages: {tutor.languages.length ? tutor.languages.join(', ').replace(/,(?!.*,)/gmi, ' and') : 'None'}</b></li>
           <li><b>Available: {convertAMPM(tutor.timesAvailable, tutor.timezone).join(', ')} {tutor.timezone}</b></li>
@@ -84,7 +91,7 @@ const InactiveRow = (props) => {
         </ul>
 
       </ReactTooltip>
-    </Row >
+    </Grid>
   )
 }
 

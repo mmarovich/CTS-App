@@ -1,51 +1,36 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
+import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
+
+
 class Landing extends Component {
   render() {
     return (
-      <div style={{ height: "75vh" }} className="container valign-wrapper">
-        <div className="row">
-          <div className="col s12 center-align">
-            <h4>
-              <b>Build</b> a login/auth app with the{" "}
-              <span style={{ fontFamily: "monospace" }}>MERN</span> stack from
-              scratch
-            </h4>
-            <p className="flow-text grey-text text-darken-1">
-              Create a (minimal) full-stack app with user authentication via
-              passport and JWTs
-            </p>
-            <br />
-            <div className="col s6">
-              <Link
-                to="/register"
-                style={{
-                  width: "140px",
-                  borderRadius: "3px",
-                  letterSpacing: "1.5px"
-                }}
-                className="btn btn-large waves-effect waves-light hoverable blue accent-3"
-              >
+      <Grid container style={{height: "75vh"}} justify="center" alignItems="center" >
+        <Grid item xs={12} container justify="center" alignItems="center">
+          <h2 style={{textAlign: "center"}}>
+            Welcome to the Central Tutor Support Portal!
+          </h2>
+        </Grid>
+        <Grid container justify="space-around">
+          <Grid item container justify="center" xs={4}>
+            <Link to="/register" style={{ color: 'white', width: "100%", textDecoration: "none" }}>
+              <Button size="large" variant="contained" color="primary" fullWidth>
                 Register
-              </Link>
-            </div>
-            <div className="col s6">
-              <Link
-                to="/login"
-                style={{
-                  width: "140px",
-                  borderRadius: "3px",
-                  letterSpacing: "1.5px"
-                }}
-                className="btn btn-large btn-flat waves-effect white black-text"
-              >
+                </Button>
+            </Link>
+          </Grid>
+          <Grid item xs={4} container justify="center">
+            <Link to="/login" style={{ textDecoration: "none", width: "100%", color: "white" }}>
+              <Button size="large" variant="contained" color="secondary" fullWidth>
                 Log In
-              </Link>
-            </div>
-          </div>
-        </div>
-      </div>
+                </Button>
+            </Link>
+          </Grid>
+        </Grid>
+      </Grid>
     );
   }
 }

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Row, Col } from 'reactstrap';
+import Grid from '@material-ui/core/Grid';
 import axios from 'axios';
 import moment from 'moment';
 
@@ -26,6 +26,8 @@ const Inactive = (props) => {
         String(val).toLowerCase().includes(q)
       );
     })
+
+    console.log(newTutors)
 
     setFilteredTutors(newTutors);
 
@@ -61,22 +63,22 @@ const Inactive = (props) => {
 
   return (
     <div>
-      <Row>
-        <Col xs={6}>
+      <Grid container>
+        <Grid item xs={6}>
           <input
             type="text"
             placeholder="Search..."
             value={searchField}
             onChange={(e) => handleSearch(e)}
           />
-        </Col>
-        <Col xs={6}>
+        </Grid>
+        <Grid item xs={6}>
           <div>
             <h4>Tutors Inactive > 3 Months</h4>
             <div>{inactiveTutors && get3MonthsInactive()}</div>
           </div>
-        </Col>
-      </Row>
+        </Grid>
+      </Grid>
       <InactiveList inactiveTutors={filteredTutors ? filteredTutors : inactiveTutors} getInactiveTutors={getInactiveTutors} />
     </div>
   )
