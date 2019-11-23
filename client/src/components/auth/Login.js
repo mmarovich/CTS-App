@@ -6,6 +6,9 @@ import { loginUser } from "../../actions/authActions";
 import classnames from "classnames";
 
 import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
+import KeyboardBackspaceRoundedIcon from '@material-ui/icons/KeyboardBackspaceRounded';
+import TextField from '@material-ui/core/TextField';
 
 class Login extends Component {
   constructor() {
@@ -55,73 +58,86 @@ class Login extends Component {
     const { errors } = this.state;
 
     return (
-        <Grid container style={{ marginTop: "4rem" }}>
-          <Grid sm={8} justify='center'>
+      <Grid container style={{ height: "75vh" }} justify="center" alignItems="center" >
+        <Grid item xs={10} sm={6} container>
+          <Grid item>
             <Link to="/" className="btn-flat waves-effect">
-              <i className="material-icons left">keyboard_backspace</i> Back to
-              home
+              <Grid item container alignItems="center">
+                <KeyboardBackspaceRoundedIcon style={{ fontSize: 40 }} />
+                Back to home
+              </Grid>
             </Link>
-            <div className="col s12" style={{ paddingLeft: "11.250px" }}>
-              <h4>
-                <b>Login</b> below
+          </Grid>
+          <Grid item xs={12} container justify="center">
+            <Grid item xs={12} container justify="center">
+              <h4 style={{ margin: 0 }}>
+                Login below
               </h4>
+            </Grid>
+            <Grid item xs={12} container justify="center">
               <p className="grey-text text-darken-1">
                 Don't have an account? <Link to="/register">Register</Link>
               </p>
-            </div>
-            <form noValidate onSubmit={this.onSubmit}>
-              <div className="input-field col s12">
-                <input
-                  onChange={this.onChange}
-                  value={this.state.email}
-                  error={errors.email}
+            </Grid>
+          </Grid>
+          <Grid item container>
+            <form noValidate onSubmit={this.onSubmit} style={{ width: "100%" }}>
+              <div>
+                <TextField
+                  style={{ width: "100%" }}
                   id="email"
-                  type="email"
                   className={classnames("", {
                     invalid: errors.email || errors.emailnotfound
                   })}
+                  label="Email"
+                  type="email"
+                  onChange={this.onChange}
+                  value={this.state.email}
+                  error={errors.email}
                 />
-                <label htmlFor="email">Email</label>
-                <span className="red-text">
+                <span style={styles.warning}>
                   {errors.email}
                   {errors.emailnotfound}
                 </span>
               </div>
-              <div className="input-field col s12">
-                <input
-                  onChange={this.onChange}
-                  value={this.state.password}
-                  error={errors.password}
+              <div>
+                <TextField
+                  style={{ width: "100%" }}
                   id="password"
-                  type="password"
                   className={classnames("", {
                     invalid: errors.password || errors.passwordincorrect
                   })}
+                  label="Password"
+                  type="password"
+                  onChange={this.onChange}
+                  value={this.state.password}
+                  error={errors.password}
                 />
-                <label htmlFor="password">Password</label>
-                <span className="red-text">
+                <span style={{ color: "red" }}>
                   {errors.password}
                   {errors.passwordincorrect}
                 </span>
               </div>
-              <div className="col s12" style={{ paddingLeft: "11.250px" }}>
-                <button
-                  style={{
-                    width: "150px",
-                    borderRadius: "3px",
-                    letterSpacing: "1.5px",
-                    marginTop: "1rem"
-                  }}
+              <Grid item xs={12} container justify="center" style={{ marginTop: 10 }}>
+                <Button
+                  variant="contained"
+                  color="primary"
                   type="submit"
-                  className="btn btn-large waves-effect waves-light hoverable blue accent-3"
                 >
                   Login
-                </button>
-              </div>
+                </Button>
+              </Grid>
             </form>
           </Grid>
         </Grid>
+      </Grid >
     );
+  }
+}
+
+const styles = {
+  warning: {
+    color: "red"
   }
 }
 

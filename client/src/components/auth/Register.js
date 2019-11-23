@@ -62,16 +62,18 @@ class Register extends Component {
     return (
       <Grid container style={{ height: "75vh" }} justify="center" alignItems="center" >
         <Grid item xs={10} sm={6} container>
-          <Grid item>
+          <Grid item container alignItems="center">
             <Link to="/" className="btn-flat waves-effect">
-              <KeyboardBackspaceRoundedIcon style={{ fontSize: 40 }} />Back to
-              home
+              <Grid item container alignItems="center">
+                <KeyboardBackspaceRoundedIcon style={{ fontSize: 40 }} />
+                Back to home
+              </Grid>
             </Link>
           </Grid>
-          <Grid item xs={12} container justify="center" style={{ paddingLeft: "11.250px" }}>
+          <Grid item xs={12} container justify="center">
             <Grid item xs={12} container justify="center">
               <h4 style={{ margin: 0 }}>
-                <b>Register</b> below
+                Register below
               </h4>
             </Grid>
             <Grid item xs={12} container justify="center" >
@@ -94,7 +96,7 @@ class Register extends Component {
                   value={this.state.firstName}
                   error={errors.firstName}
                 />
-                <span className="red-text">{errors.firstName}</span>
+                <span style={styles.warning}>{errors.firstName}</span>
               </div>
               <div>
                 <TextField
@@ -108,7 +110,7 @@ class Register extends Component {
                   value={this.state.lastName}
                   error={errors.lastName}
                 />
-                <span className="red-text">{errors.lastName}</span>
+                <span style={styles.warning}>{errors.lastName}</span>
               </div>
               <div>
                 <TextField
@@ -122,7 +124,7 @@ class Register extends Component {
                   value={this.state.email}
                   error={errors.email}
                 />
-                <span className="red-text">{errors.email}</span>
+                <span style={styles.warning}>{errors.email}</span>
               </div>
               <div>
                 <TextField
@@ -137,7 +139,7 @@ class Register extends Component {
                   value={this.state.password}
                   error={errors.password}
                 />
-                <span className="red-text">{errors.password}</span>
+                <span style={styles.warning}>{errors.password}</span>
               </div>
               <div>
                 <TextField
@@ -152,9 +154,9 @@ class Register extends Component {
                   value={this.state.password2}
                   error={errors.password2}
                 />
-                <span className="red-text">{errors.password2}</span>
+                <span style={styles.warning}>{errors.password2}</span>
               </div>
-              <Grid item xs={12} container justify="center" style={{marginTop: 10}}>
+              <Grid item xs={12} container justify="center" style={{ marginTop: 10 }}>
                 <Button
                   variant="contained"
                   color="primary"
@@ -169,6 +171,12 @@ class Register extends Component {
         </Grid>
       </Grid >
     );
+  }
+}
+
+const styles = {
+  warning: {
+    color: "red"
   }
 }
 
