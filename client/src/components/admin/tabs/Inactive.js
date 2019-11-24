@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Grid from '@material-ui/core/Grid';
+import TextField from '@material-ui/core/TextField';
 import axios from 'axios';
 import moment from 'moment';
 
@@ -27,8 +28,6 @@ const Inactive = (props) => {
       );
     })
 
-    console.log(newTutors)
-
     setFilteredTutors(newTutors);
 
   }
@@ -36,12 +35,12 @@ const Inactive = (props) => {
   const get3MonthsInactive = () => {
 
     var now = moment(new Date()); //todays date
-    
+
     const threeMonthsInactive = inactiveTutors.map((tutor, i) => {
       var end = moment(tutor.lastAssigned); // another date
       var duration = moment.duration(now.diff(end));
       var months = duration.asMonths();
-      
+
       if (months > 3) {
         return <p key={i} style={{
           margin: '0 5px 0 0',
@@ -65,9 +64,11 @@ const Inactive = (props) => {
     <div>
       <Grid container>
         <Grid item xs={6}>
-          <input
+          <TextField
+            style={{ width: "100%" }}
+            id="search"
             type="text"
-            placeholder="Search..."
+            label="Search..."
             value={searchField}
             onChange={(e) => handleSearch(e)}
           />

@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Grid from '@material-ui/core/Grid';
+
 const Info = (props) => {
 
   const getActiveTutors = (status) => {
@@ -11,15 +13,45 @@ const Info = (props) => {
   }
 
   return (
-    <div style={{backgroundColor: 'lightgrey', padding: '5px'}}>
-      {props.allTutors && 
-      <ul style={{margin: '0', textAlign: 'center'}}>
-        <li><b>Total</b> {props.allTutors.length}</li>
-        <li><b>Active</b> {getActiveTutors('active')}</li>
-        <li><b>On Hold</b> {getActiveTutors('hold')}</li>
-        <li><b>Inactive</b> {getActiveTutors('inactive')}</li>
-        <li><b>Resigned</b> {getActiveTutors('resigned')}</li>
-      </ul>}
+    <div style={{ backgroundColor: 'lightgrey', padding: '5px' }}>
+      {props.allTutors &&
+        <Grid container>
+          <Grid
+            item
+            container
+            xs={12}
+            justify="center"
+          ><strong>Total--- </strong> {props.allTutors.length}
+          </Grid>
+          <Grid
+            item
+            container
+            xs={12}
+            justify="center"
+          ><strong>Active---</strong> {getActiveTutors('active')}
+          </Grid>
+          <Grid
+            item
+            container
+            xs={12}
+            justify="center"
+          ><strong>On Hold---</strong> {getActiveTutors('hold')}
+          </Grid>
+          <Grid
+            item
+            container
+            xs={12}
+            justify="center"
+          ><strong>Inactive---</strong> {getActiveTutors('inactive')}
+          </Grid>
+          <Grid
+            item
+            container
+            xs={12}
+            justify="center"
+          ><strong>Resigned---</strong> {getActiveTutors('resigned')}
+          </Grid>
+        </Grid>}
     </div>
   )
 }

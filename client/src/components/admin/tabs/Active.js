@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
 import axios from 'axios';
 
 import ActiveList from './active-tools/ActiveList';
@@ -19,9 +20,7 @@ const Active = (props) => {
 
   const handleSearch = (e) => {
     const { value, id } = e.currentTarget;
-    console.log(e.currentTarget)
-    console.log(value)
-    console.log(id)
+
     if (id === "search" || id === "reset") {
       setSearchField(value);
 
@@ -51,10 +50,11 @@ const Active = (props) => {
     <div>
       <Grid container>
         <Grid item xs={6}>
-          <input
+          <TextField
+            style={{ width: "100%" }}
+            id="search"
             type="text"
-            className="search"
-            placeholder="Search..."
+            label="Search..."
             value={searchField}
             onChange={(e) => handleSearch(e)}
           />

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Grid from '@material-ui/core/Grid';
+import TextField from '@material-ui/core/TextField';
 
 import { Info, TutorList } from './main-tools';
 import axios from "axios";
@@ -47,9 +48,10 @@ const Main = (props) => {
       </Grid>
       <Grid container spacing={3}>
         <Grid item xs={6}>
-          <input
+          <TextField
+            style={{width: "100%"}}
             type="text"
-            placeholder="Search..."
+            label="Search..."
             value={searchField}
             onChange={(e) => handleSearch(e)}
           />
