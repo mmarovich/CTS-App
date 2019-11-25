@@ -1,25 +1,25 @@
 import React, { Component } from "react";
 // import { Link } from "react-router-dom";
 
+import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
+
 class Navbar extends Component {
   render() {
     return (
-      <div style={{
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "space-between",
-        backgroundColor: "lightgrey"
-      }}>
-        <div className="logo">
-          <h6>Central Tutor Support</h6>
-        </div>
-        <button
-          onClick={this.props.onLogoutClick}
-          className="btn waves-effect waves-light hoverable blue accent-3"
-        >
-          Logout
-            </button>
-      </div>
+      <Grid container justify="space-around" alignItems="center" style={{ backgroundColor: 'lightgrey' }}>
+        <Grid item container xs={5} justify="flex-start">
+          <h3>Central Tutor Support</h3>
+        </Grid>
+        <Grid item container xs={5} justify="flex-end">
+          <Button
+            variant='contained'
+            color="primary"
+            style={{ height: 50 }}
+            onClick={this.props.onLogoutClick}
+          >Logout</Button>
+        </Grid>
+      </Grid>
     );
   }
 }
