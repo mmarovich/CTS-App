@@ -37,7 +37,7 @@ const OnHold = () => {
   }, [])
 
   return (
-    <div>
+    <div style={{margin: 10}}>
       <Grid container>
         <Grid item xs={6}>
           <TextField

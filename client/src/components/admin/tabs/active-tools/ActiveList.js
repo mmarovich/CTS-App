@@ -16,7 +16,7 @@ const ActiveList = (props) => {
   }
 
   return (
-    <div>
+    <div style={{marginTop: 10}}>
       <Grid container style={styles.headerStyles}>
         <Grid item xs={1}>Queue</Grid>
         <Grid item xs={2}></Grid>

@@ -61,9 +61,9 @@ const Inactive = (props) => {
   }, [])
 
   return (
-    <div>
-      <Grid container>
-        <Grid item xs={6}>
+    <div style={{margin: 10}}>
+      <Grid container justify="space-between" alignItems="center">
+        <Grid item xs={5}>
           <TextField
             style={{ width: "100%" }}
             id="search"

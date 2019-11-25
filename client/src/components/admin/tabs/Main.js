@@ -37,7 +37,7 @@ const Main = (props) => {
   }, [])
 
   return (
-    <div>
+    <div style={{margin: 10}}>
       <Grid container spacing={3}>
         <Grid item xs={6}>
 

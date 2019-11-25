@@ -20,8 +20,7 @@ const OnholdList = (props) => {
   const renderTutors = () => {
     if (props.onHoldTutors) {
       return props.onHoldTutors.map((tutor, i) => {
-        return <Grid container style={styles.rowFont} key={i}>
-          <Grid item xs={2}>{tutor.queueNum}</Grid>
+        return <Grid container alignItems="center" style={styles.rowFont} key={i}>
           <Grid item xs={2}>
             <span data-tip data-for={`holdTT-${i}`} data-event='click focus'>
               {`${tutor.firstName} 
@@ -62,9 +61,8 @@ const OnholdList = (props) => {
   }
 
   return (
-    <div>
+    <div style={{marginTop: 10}}>
       <Grid container style={styles.headerStyles}>
-        <Grid item xs={2}>Queue</Grid>
         <Grid item xs={2}>Name</Grid>
         <Grid item xs={2}>Email</Grid>
         <Grid item xs={2}>Timezone</Grid>

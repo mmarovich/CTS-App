@@ -43,7 +43,7 @@ const ResignedList = (props) => {
   }
 
   return (
-    <div>
+    <div style={{marginTop: 10}}>
       <Grid container style={styles.headerStyles}>
         <Grid item xs={2}>Name</Grid>
         <Grid item xs={2}>Email</Grid>

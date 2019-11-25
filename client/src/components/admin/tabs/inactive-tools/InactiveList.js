@@ -32,7 +32,8 @@ const InactiveList = (props) => {
 const styles = {
   headerStyles: {
     fontSize: '12px',
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    marginTop: 10
   },
   rowFont: {
     fontSize: '10px',

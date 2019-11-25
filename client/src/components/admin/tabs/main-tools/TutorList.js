@@ -30,7 +30,6 @@ const TutorList = (props) => {
     if (props.allTutors) {
       return props.allTutors.map((tutor, i) => {
         return <Grid container style={styles.rowFont} key={i}>
-          <Grid item xs={2}>{tutor.queueNum}</Grid>
           <Grid item xs={2}>
             <span data-tip data-for={`mainTT-${i}`} data-event='click focus'>
               {`${tutor.firstName} 
@@ -67,9 +66,8 @@ const TutorList = (props) => {
   }
 
   return (
-    <div>
+    <div style={{marginTop: 10}}>
       <Grid container style={styles.headerStyles}>
-        <Grid item xs={2}>Queue</Grid>
         <Grid item xs={2}>Name</Grid>
         <Grid item xs={2}>Email</Grid>
         <Grid item xs={2}>Timezone</Grid>

@@ -47,9 +47,9 @@ const Active = (props) => {
   }, [])
 
   return (
-    <div>
-      <Grid container>
-        <Grid item xs={6}>
+    <div style={{margin: 10}}>
+      <Grid container justify="space-between">
+        <Grid item xs={5}>
           <TextField
             style={{ width: "100%" }}
             id="search"
@@ -59,10 +59,11 @@ const Active = (props) => {
             onChange={(e) => handleSearch(e)}
           />
         </Grid>
-        <Grid item xs={6} style={{display: 'flex', justifyContent: 'space-between'}}>
+        <Grid item xs={6} container justify="space-between" alignItems="center">
           <Button
             variant='outlined'
             color="primary"
+            style={styles.activeButton}
             id="search"
             value="FSF"
             onClick={(e) => handleSearch(e)}
@@ -70,6 +71,7 @@ const Active = (props) => {
           <Button
             variant='outlined'
             color="primary"
+            style={styles.activeButton}
             id="search"
             value="DV"
             onClick={(e) => handleSearch(e)}
@@ -77,6 +79,7 @@ const Active = (props) => {
           <Button
             variant='outlined'
             color="primary"
+            style={styles.activeButton}
             id="search"
             value="Cyber"
             onClick={(e) => handleSearch(e)}
@@ -84,6 +87,7 @@ const Active = (props) => {
           <Button
             variant='outlined'
             color="primary"
+            style={styles.activeButton}
             id="search"
             value="UXUI"
             onClick={(e) => handleSearch(e)}
@@ -91,6 +95,7 @@ const Active = (props) => {
           <Button
             variant='outlined'
             color="primary"
+            style={styles.activeButton}
             id="search"
             value="FinTech"
             onClick={(e) => handleSearch(e)}
@@ -98,6 +103,7 @@ const Active = (props) => {
           <Button
             variant='outlined'
             color="primary"
+            style={styles.activeButton}
             id="reset"
             onClick={(e) => handleSearch(e)}
           >Reset</Button>
@@ -106,6 +112,14 @@ const Active = (props) => {
       <ActiveList activeTutors={filteredTutors ? filteredTutors : activeTutors} getActiveTutors={getActiveTutors}/>
     </div>
   )
+}
+
+const styles = {
+  activeButton: {
+    width: 50, 
+    height: 30, 
+    fontSize: 12
+  }
 }
 
 export default Active;

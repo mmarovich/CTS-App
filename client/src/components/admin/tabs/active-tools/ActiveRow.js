@@ -41,12 +41,13 @@ const ActiveRow = (props) => {
 
 
   return (
-    <Grid container style={styles.rowFont} key={i}>
+    <Grid container style={styles.rowFont} alignItems="center" key={i}>
       <Grid item xs={1}>{i + 1}</Grid>
       <Grid item xs={2}>
         <Button
           variant="contained"
           color='primary'
+          style={styles.activeButton}
           value={tutor.email}
           onClick={assignTutor}
         >Assign</Button>
@@ -90,6 +91,11 @@ const styles = {
     overflowWrap: 'break-word',
     backgroundColor: 'lightgrey',
     margin: '0 0 1px 0'
+  },
+  activeButton: {
+    width: 50, 
+    height: 30, 
+    fontSize: 12
   }
 }
 

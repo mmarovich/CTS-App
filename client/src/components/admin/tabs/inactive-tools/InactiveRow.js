@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Grid from '@material-ui/core/Grid';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 import ReactTooltip from 'react-tooltip';
 import axios from 'axios';
 import moment from 'moment-timezone';
@@ -53,7 +55,7 @@ const InactiveRow = (props) => {
   }
 
   return (
-    <Grid container style={styles.rowFont}>
+    <Grid container style={styles.rowFont} alignItems="center">
       <Grid item xs={2}>
         <span data-tip data-for={`inactiveTT-${id}`} data-event='click focus'>
           {`${tutor.firstName} 
@@ -66,14 +68,24 @@ const InactiveRow = (props) => {
       <Grid item xs={2}>{tutor.timezone}</Grid>
       <Grid item xs={2}>{moment(tutor.lastAssigned).format('M/D/YY')}</Grid>
       <Grid item xs={1}>
-          <input
-            type='text'
+          <TextField
+            style={{ width: "100%" }}
+            type="text"
             value={changed ? wanted : studentsWanted}
             onChange={(e) => handleChange(e)}
           />
       </Grid>
       <Grid item xs={1}>
-          <button type="submit" onClick={handleSubmit}>Throw In!</button>
+      <Button
+            variant='contained'
+            color="primary"
+            type="submit"
+            style={styles.inactiveButton}
+            id="search"
+            value="FSF"
+            onClick={handleSubmit}
+          >Throw In!</Button>
+          {/* <button type="submit" onClick={handleSubmit}>Throw In!</button> */}
       </Grid>
       <ReactTooltip
         globalEventOff='click'
@@ -102,6 +114,11 @@ const styles = {
     overflowWrap: 'break-word',
     backgroundColor: 'lightgrey',
     margin: '0 0 1px 0'
+  },
+  inactiveButton: {
+    width: 75, 
+    height: 25, 
+    fontSize: 8
   }
 }
 
