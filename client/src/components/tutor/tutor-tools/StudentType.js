@@ -3,8 +3,10 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import axios from 'axios';
+import { useAlert } from 'react-alert'
 
 const StudentType = ({curriculum, email, handleShowAlert}) => {
+  const alert = useAlert()
   const [state, setState] = useState({
     FSF: false,
     DV: false,
@@ -31,7 +33,7 @@ const StudentType = ({curriculum, email, handleShowAlert}) => {
       curriculum, email
     })
     const msg = response.data
-    handleShowAlert(msg)
+    alert.show(msg)
   }
 
   const renderCheckboxes = () => {
@@ -56,9 +58,9 @@ const StudentType = ({curriculum, email, handleShowAlert}) => {
   }
 
   return (
-    <div style={{padding: '0 10px 40px 10px'}}>
+    <div style={{ textAlign: 'center', margin: 10, padding: '0 10px 40px 10px', border: '2px solid black'}}>
       <h6>What curriculums do you feel confident tutoring?</h6>
-      <FormGroup style={{ alignItems: 'center' }} row>
+      <FormGroup style={{ justifyContent: 'space-around', alignItems: 'center' }} row>
         {renderCheckboxes()}
       </FormGroup>
     </div >

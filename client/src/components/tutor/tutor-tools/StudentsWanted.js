@@ -1,7 +1,12 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useAlert } from 'react-alert'
 
-const StudentsWanted = ({studentsWanted, email, handleShowAlert}) => {
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+
+const StudentsWanted = ({ studentsWanted, email, handleShowAlert }) => {
+  const alert = useAlert()
   const [field, setField] = useState("")
 
   useEffect(() => {
@@ -18,24 +23,31 @@ const StudentsWanted = ({studentsWanted, email, handleShowAlert}) => {
       email,
       studentsWanted: field
     })
-    
+
     const msg = response.data;
 
-    handleShowAlert(msg)
+    alert.show(msg)
   }
 
   return (
-    <div style={{padding: '0 10px 40px 10px'}}>
+    <div style={{textAlign: 'center', margin: 10, border: '2px solid black'}}>
       <h6>How many <em>more</em> students do you want?</h6>
 
-        <input
+      <TextField
+        style={{ width: "100%" }}
+        type="text"
+        label={<div>Add <em>n</em> students...</div>}
         value={field}
         onChange={changeField}
-      /> 
-      <button
+      />
+      <Button
+        style={{ marginTop: 10 }}
+        variant='contained'
+        color="primary"
+        size="small"
         onClick={submitWanted}
-      >Set</button>
-    </div> 
+      >Set</Button>
+    </div>
   )
 }
 

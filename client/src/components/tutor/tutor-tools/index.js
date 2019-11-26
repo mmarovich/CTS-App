@@ -1,4 +1,3 @@
-import MsgDisplay from './MsgDisplay';
 import StudentsWanted from './StudentsWanted';
 import StudentType from './StudentType';
 import Timezone from './Timezone';
@@ -10,7 +9,6 @@ import EarlyStudents from './EarlyStudents';
 import Languages from './Languages';
 
 export {
-  MsgDisplay,
   StudentsWanted,
   StudentType,
   Timezone,

@@ -4,8 +4,10 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import axios from 'axios';
 import moment from 'moment';
+import { useAlert } from 'react-alert'
 
 const TimePreferences = ({timesAvailable, email, handleShowAlert}) => {
+  const alert = useAlert()
   const [state, setState] = useState({
     "01": false, "02": false, "03": false, "04": false,
     "05": false, "06": false, "07": false, "08": false,
@@ -33,7 +35,7 @@ const TimePreferences = ({timesAvailable, email, handleShowAlert}) => {
       timesAvailable, email
     })
     const msg = response.data
-    handleShowAlert(msg)
+    alert.show(msg)
   }
 
 
@@ -64,7 +66,7 @@ const TimePreferences = ({timesAvailable, email, handleShowAlert}) => {
   }
 
   return (
-    <div style={{padding: '0 10px 40px 10px'}}>
+    <div style={{ textAlign: 'center', margin: 10, border: '2px solid black'}}>
       <h6>Times Available</h6>
       <FormGroup style={{ alignItems: 'center' }} row>
         {renderCheckboxes()}

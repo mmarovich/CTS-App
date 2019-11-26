@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Input from '@material-ui/core/Input';
@@ -7,11 +7,13 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Chip from '@material-ui/core/Chip';
+import { useAlert } from 'react-alert'
 
 import languageList from './languageList';
 import Axios from 'axios';
 
-const Languages = ({languages, email, handleShowAlert}) => {
+const Languages = ({ languages, email, handleShowAlert }) => {
+  const alert = useAlert()
   const [languageName, setLanguageName] = useState([]);
   const classes = useStyles();
   const theme = useTheme();
@@ -29,39 +31,37 @@ const Languages = ({languages, email, handleShowAlert}) => {
       email, languages: languageName
     })
     const msg = response.data
-    handleShowAlert(msg)
+    alert.show(msg)
   }
 
   return (
-    <div>
-      <div>
-        <FormControl className={classes.formControl}>
-          <InputLabel id="demo-mutiple-chip-label">Choose your languages</InputLabel>
-          <Select
-            labelId="demo-mutiple-chip-label"
-            id="demo-mutiple-chip"
-            multiple
-            value={languageName}
-            onChange={handleChange}
-            onClose={saveLanguages}
-            input={<Input id="select-multiple-chip" />}
-            renderValue={selected => (
-              <div className={classes.chips}>
-                {selected.map(value => (
-                  <Chip key={value} label={value} className={classes.chip} />
-                ))}
-              </div>
-            )}
-            MenuProps={MenuProps}
-          >
-            {languageList.map(language => (
-              <MenuItem key={language} value={language} style={getStyles(language, languageName, theme)}>
-                {language}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-      </div>
+    <div style={{ textAlign: 'center', margin: 10, padding: 20, border: '2px solid black' }}>
+      <FormControl className={classes.formControl}>
+        <InputLabel id="demo-mutiple-chip-label">Choose your languages</InputLabel>
+        <Select
+          labelId="demo-mutiple-chip-label"
+          id="demo-mutiple-chip"
+          multiple
+          value={languageName}
+          onChange={handleChange}
+          onClose={saveLanguages}
+          input={<Input id="select-multiple-chip" />}
+          renderValue={selected => (
+            <div className={classes.chips}>
+              {selected.map(value => (
+                <Chip key={value} label={value} className={classes.chip} />
+              ))}
+            </div>
+          )}
+          MenuProps={MenuProps}
+        >
+          {languageList.map(language => (
+            <MenuItem key={language} value={language} style={getStyles(language, languageName, theme)}>
+              {language}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
     </div>
   )
 }

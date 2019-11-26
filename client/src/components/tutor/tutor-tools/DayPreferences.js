@@ -3,8 +3,10 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import axios from 'axios';
+import { useAlert } from 'react-alert'
 
 const DayPreferences = ({daysAvailable, email, handleShowAlert}) => {
+  const alert = useAlert()
   const [state, setState] = useState({
     Mondays: false,
     Tuesdays: false,
@@ -33,7 +35,7 @@ const DayPreferences = ({daysAvailable, email, handleShowAlert}) => {
       daysAvailable, email
     })
     const msg = response.data
-    handleShowAlert(msg)
+    alert.show(msg)
   }
 
   const renderCheckboxes = () => {
@@ -58,7 +60,7 @@ const DayPreferences = ({daysAvailable, email, handleShowAlert}) => {
   }
 
   return(
-    <div style={{padding: '0 10px 40px 10px'}}>
+    <div style={{ textAlign: 'center', margin: 10, border: '2px solid black'}}>
       <h6>Days Available</h6>
       <FormGroup style={{ alignItems: 'center' }} row>
         {renderCheckboxes()}

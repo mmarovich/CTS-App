@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Input from '@material-ui/core/Input';
@@ -7,11 +7,13 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Chip from '@material-ui/core/Chip';
+import { useAlert } from 'react-alert'
 
 import universities from './universities';
 import Axios from 'axios';
 
-const InPerson = ({Unis4InPerson, email, handleShowAlert}) => {
+const InPerson = ({ Unis4InPerson, email, handleShowAlert }) => {
+  const alert = useAlert()
   const [universityName, setUniversityName] = useState([]);
   const classes = useStyles();
   const theme = useTheme();
@@ -29,39 +31,37 @@ const InPerson = ({Unis4InPerson, email, handleShowAlert}) => {
       email, Unis4InPerson: universityName
     })
     const msg = response.data
-    handleShowAlert(msg)
+    alert.show(msg)
   }
 
   return (
-    <div>
-      <div>
-        <FormControl className={classes.formControl}>
-          <InputLabel id="demo-mutiple-chip-label">For In-person</InputLabel>
-          <Select
-            labelId="demo-mutiple-chip-label"
-            id="demo-mutiple-chip"
-            multiple
-            value={universityName}
-            onChange={handleChange}
-            onClose={saveInPerson}
-            input={<Input id="select-multiple-chip" />}
-            renderValue={selected => (
-              <div className={classes.chips}>
-                {selected.map(value => (
-                  <Chip key={value} label={value} className={classes.chip} />
-                ))}
-              </div>
-            )}
-            MenuProps={MenuProps}
-          >
-            {universities.map(university => (
-              <MenuItem key={university} value={university} style={getStyles(university, universityName, theme)}>
-                {university}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-      </div>
+    <div style={{textAlign: 'center', margin: 10, padding: 20, border: '2px solid black'}}>
+      <FormControl className={classes.formControl}>
+        <InputLabel id="demo-mutiple-chip-label">For In-person</InputLabel>
+        <Select
+          labelId="demo-mutiple-chip-label"
+          id="demo-mutiple-chip"
+          multiple
+          value={universityName}
+          onChange={handleChange}
+          onClose={saveInPerson}
+          input={<Input id="select-multiple-chip" />}
+          renderValue={selected => (
+            <div className={classes.chips}>
+              {selected.map(value => (
+                <Chip key={value} label={value} className={classes.chip} />
+              ))}
+            </div>
+          )}
+          MenuProps={MenuProps}
+        >
+          {universities.map(university => (
+            <MenuItem key={university} value={university} style={getStyles(university, universityName, theme)}>
+              {university}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
     </div>
   )
 }

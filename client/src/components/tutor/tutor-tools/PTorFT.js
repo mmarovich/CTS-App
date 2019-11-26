@@ -3,8 +3,10 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import axios from 'axios';
+import { useAlert } from 'react-alert'
 
 const PTorFT = ({ PTorFTstudents, email, handleShowAlert }) => {
+  const alert = useAlert()
   const [state, setState] = useState({
     PT: false,
     FT: false,
@@ -28,7 +30,7 @@ const PTorFT = ({ PTorFTstudents, email, handleShowAlert }) => {
       PTorFTstudents, email
     })
     const msg = response.data
-    handleShowAlert(msg)
+    alert.show(msg)
   }
 
   const renderCheckboxes = () => {
@@ -53,9 +55,9 @@ const PTorFT = ({ PTorFTstudents, email, handleShowAlert }) => {
   }
 
   return (
-    <div style={{ padding: '0 10px 40px 10px' }}>
+    <div style={{ textAlign: 'center', margin: 10, border: '2px solid black'}}>
       <h6>Would you like Full-time and/or Part-time students?</h6>
-      <FormGroup style={{ alignItems: 'center' }} row>
+      <FormGroup style={{justifyContent: 'space-around', alignItems: 'center' }} row>
         {renderCheckboxes()}
       </FormGroup>
 

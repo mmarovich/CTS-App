@@ -6,8 +6,10 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import { useAlert } from 'react-alert'
 
 const Timezone = ({email, savedTimezone, handleShowAlert}) => {
+  const alert = useAlert()
   const [timezone, setTimezone] = useState(savedTimezone);
   const [time, setTime] = useState(moment.tz(moment(), timezone).format('h:mm:ss A'));
 
@@ -37,7 +39,7 @@ const Timezone = ({email, savedTimezone, handleShowAlert}) => {
       email, timezone: newTimezone
     })
     const msg = response.data;
-    handleShowAlert(msg)
+    alert.show(msg)
   }
 
   const handleChange = e => {
@@ -47,7 +49,7 @@ const Timezone = ({email, savedTimezone, handleShowAlert}) => {
   };
 
   return (
-    <div style={{padding: '0 10px 40px 10px'}}>
+    <div style={{textAlign: 'center', margin: 10, padding: 20, border: '2px solid black'}}>
 
       <FormControl style={{ width: '100%' }}>
         <InputLabel id="demo-simple-select-label">Timezone</InputLabel>

@@ -3,8 +3,10 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import axios from 'axios';
+import { useAlert } from 'react-alert'
 
 const EarlyStudents = ({ earlyStudents, email, handleShowAlert }) => {
+  const alert = useAlert()
   const [state, setState] = useState({
     Early: false,
     NonEarly: false,
@@ -28,7 +30,7 @@ const EarlyStudents = ({ earlyStudents, email, handleShowAlert }) => {
       earlyStudents, email
     })
     const msg = response.data
-    handleShowAlert(msg)
+    alert.show(msg)
   }
 
   const renderCheckboxes = () => {
@@ -53,9 +55,9 @@ const EarlyStudents = ({ earlyStudents, email, handleShowAlert }) => {
   }
 
   return (
-    <div style={{ padding: '0 10px 40px 10px' }}>
+    <div style={{ textAlign: 'center', margin: 10, border: '2px solid black'}}>
       <h6>Early or Mid/Late course students?</h6>
-      <FormGroup style={{ alignItems: 'center' }} row>
+      <FormGroup style={{ justifyContent: 'space-around', alignItems: 'center'}} row>
         {renderCheckboxes()}
       </FormGroup>
 
