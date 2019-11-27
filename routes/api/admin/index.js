@@ -6,6 +6,9 @@ const queueController = require("../../../controllers/queueController");
 router.route("/tutors")
   .get(tutorsController.findAll)
 
+router.route("/tutorNames")
+  .get(tutorsController.findAllNames)
+
 router.route("/holdTutors")
   .get(tutorsController.findHold)
 

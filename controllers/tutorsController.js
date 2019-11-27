@@ -15,26 +15,39 @@ module.exports = {
       res.send(allTutors)
     })
   },
+  findAllNames: async (req, res) => {
+    const tutors = await db.User.find({
+      $or: [
+        { accountStatus: "active" },
+        { accountStatus: "inactive" }]
+    }).sort({firstName: 1})
+
+    const tutorNames = tutors.map((tutor) => {
+      return {firstName: tutor.firstName, lastName: tutor.lastName}
+    })
+
+    res.send(tutorNames)
+  },
   findHold: async (req, res) => {
     const holdTutors = await db.User.find({ accountStatus: 'hold' })
     res.send(holdTutors)
   },
   findActive: async (req, res) => {
     const activeTutors = await db.User.find({ accountStatus: 'active' })
-    
-    const sortedActives = activeTutors.sort(function(a,b){
+
+    const sortedActives = activeTutors.sort(function (a, b) {
       return new Date(a.lastAssigned) - new Date(b.lastAssigned);
     });
-    
+
     res.send(sortedActives)
   },
   findInactive: async (req, res) => {
     const inactiveTutors = await db.User.find({ accountStatus: 'inactive' })
-    
-    const sortedInactives = inactiveTutors.sort(function(a,b){
+
+    const sortedInactives = inactiveTutors.sort(function (a, b) {
       return new Date(a.lastAssigned) - new Date(b.lastAssigned);
     });
-    
+
     res.send(sortedInactives)
   },
   findResigned: async (req, res) => {
