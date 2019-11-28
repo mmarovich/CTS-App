@@ -9,6 +9,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import Axios from 'axios';
+import feedbackValidator from './feedbackValidator';
 
 import DateFnsUtils from '@date-io/date-fns';
 import {
@@ -20,12 +21,21 @@ import {
 const SubmitFeedback = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [tutors, setTutors] = useState([])
+  const [errors, setErrors] = useState({
+    firstName: false, lastName: false, email: false,
+    classCode: false, tutor: false, length: false
+  })
+  const [messages, setMessages] = useState({
+    firstName: '', lastName: '', email: '',
+    classCode: '', tutor: '', length: ''
+  })
   const [state, setState] = useState({
     firstName: "",
     lastName: "",
     email: "",
     classCode: "",
-    tutor: ""
+    tutor: "",
+    length: ""
   });
   const classes = useStyles();
 
@@ -60,7 +70,10 @@ const SubmitFeedback = () => {
 
   const submitFeedback = (e) => {
     e.preventDefault();
-    console.log(state)
+    const validations = feedbackValidator(state)
+
+    setErrors(validations.errors)
+    setMessages(validations.messages)
   }
 
   return (
@@ -71,18 +84,22 @@ const SubmitFeedback = () => {
           <Grid item container xs={12} justify="center">
             <TextField
               required
+              error={errors.firstName}
               style={{ minWidth: 320 }}
               name="firstName"
               className={classes.textField}
+              helperText={messages.firstName}
               label="First Name"
               margin="normal"
               onChange={handleChange('firstName')}
             />
             <TextField
               required
+              error={errors.lastName}
               style={{ minWidth: 320 }}
               name="lastName"
               className={classes.textField}
+              helperText={messages.lastName}
               label="Last Name"
               margin="normal"
               onChange={handleChange('lastName')}
@@ -91,10 +108,12 @@ const SubmitFeedback = () => {
           <Grid item container xs={12} justify="center">
             <TextField
               required
+              error={errors.email}
               style={{ minWidth: 320 }}
               name="email"
               type="email"
               className={classes.textField}
+              helperText={messages.email}
               label="Email"
               margin="normal"
               onChange={handleChange('email')}
@@ -103,12 +122,16 @@ const SubmitFeedback = () => {
           <Grid item container xs={12} justify="center">
             <TextField
               required
+              error={errors.classCode}
               style={{ minWidth: 320 }}
               name="classCode"
               className={classes.textField}
+              helperText={
+                errors.classCode ? messages.classCode + ". You can find it on the Tutor Assignment email that you received." :
+                "You can find it on the Tutor Assignment email that you received."
+              }
               label="Class Code"
               margin="normal"
-              helperText="You can find it on the Tutor Assignment email that you received."
               onChange={handleChange('classCode')}
             />
           </Grid>
@@ -117,6 +140,7 @@ const SubmitFeedback = () => {
               <InputLabel htmlFor="age-native-required">Tutor</InputLabel>
               <Select
                 native
+                error={errors.tutor}
                 value={state.tutor}
                 onChange={handleChange('tutor')}
                 name="tutor"
@@ -134,7 +158,7 @@ const SubmitFeedback = () => {
                   })
                 }
               </Select>
-              <FormHelperText>Required</FormHelperText>
+              {errors.tutor && <FormHelperText style={{color: 'red'}}>{messages.tutor}</FormHelperText>}
             </FormControl>
           </Grid>
           <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -142,6 +166,8 @@ const SubmitFeedback = () => {
               <KeyboardDatePicker
                 required
                 margin="normal"
+                maxDate={new Date()}
+                maxDateMessage="That date hasn't happened yet..."
                 style={{ minWidth: 320 }}
                 id="date-picker-dialog"
                 label="Session Date"
@@ -151,6 +177,20 @@ const SubmitFeedback = () => {
                 KeyboardButtonProps={{
                   'aria-label': 'change date',
                 }}
+              />
+            </Grid>
+            <Grid item container xs={12} justify="center">
+              <TextField
+                required
+                error={errors.length}
+                helperText={messages.length}
+                style={{ minWidth: 320 }}
+                name="length"
+                type="text"
+                className={classes.textField}
+                label="How long was the session? Total minutes:"
+                margin="normal"
+                onChange={handleChange('length')}
               />
             </Grid>
           </MuiPickersUtilsProvider>
