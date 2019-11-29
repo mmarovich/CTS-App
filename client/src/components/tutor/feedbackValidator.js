@@ -1,11 +1,13 @@
 const feedbackValidator = submission => {
   const errors = {
     firstName: false, lastName: false, email: false,
-    classCode: false, tutor: false, length: false
+    classCode: false, tutor: false, length: false,
+    topics: false, helped: false, tutorInterest: false
   }
   const messages = {
     firstName: '', lastName: '', email: '',
-    classCode: '', tutor: '', length: ''
+    classCode: '', tutor: '', length: '',
+    topics: '', helped: '', tutorInterest: ''
   }
   
   if (submission.firstName === "") {
@@ -37,12 +39,26 @@ const feedbackValidator = submission => {
     messages.tutor = 'Who tutored your session?'
   }
 
+
   if (submission.length === "") {
     errors.length = true
     messages.length = 'Length of session required'
-  } else if (isNaN(parseInt(submission.length))) {
+  } else if (isNaN(submission.length)) {
     errors.length = true
     messages.length = 'Must be a number'
+  }
+
+  if (submission.topics === "") {
+    errors.topics = true
+    messages.topics = "Did you discuss/learn anything?"
+  }
+
+  if (submission.helped === "") {
+    errors.helped = true
+  }
+
+  if (submission.tutorInterest === "") {
+    errors.tutorInterest = true
   }
 
   return {
