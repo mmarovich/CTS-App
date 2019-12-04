@@ -24,12 +24,14 @@ const SubmitFeedback = () => {
   const [errors, setErrors] = useState({
     firstName: false, lastName: false, email: false,
     classCode: false, tutor: false, length: false,
-    topics: false, helped: false, tutorInterest: false
+    topics: false, helped: false, tutorInterest: false,
+    continueTopic: false, studyHours: false, comments: false
   })
   const [messages, setMessages] = useState({
     firstName: '', lastName: '', email: '',
     classCode: '', tutor: '', length: '',
-    topics: '', helped: '', tutorInterest: ''
+    topics: '', helped: '', tutorInterest: '',
+    continueTopic: '', studyHours: '', comments: ''
   })
   const [state, setState] = useState({
     firstName: "",
@@ -39,8 +41,12 @@ const SubmitFeedback = () => {
     tutor: "",
     length: "",
     topics: "",
-    helped: '',
-    tutorInterest: ''
+    helped: "",
+    tutorInterest: "",
+    continueTopic: "",
+    studyHours: "",
+    comments: "",
+    privateComments: ""
   });
   const classes = useStyles();
 
@@ -87,7 +93,7 @@ const SubmitFeedback = () => {
       <h3 style={{ textAlign: 'center' }}>Submit Feedback!</h3>
       <form className={classes.container} noValidate autoComplete="off">
         <Grid container justify="center">
-          <Grid item container xs={12} justify="center">
+          <Grid item container xs={12} justify="center" alignItems="center">
             <TextField
               required
               variant="outlined"
@@ -112,8 +118,6 @@ const SubmitFeedback = () => {
               margin="normal"
               onChange={handleChange('lastName')}
             />
-          </Grid>
-          <Grid item container xs={12} justify="center">
             <TextField
               required
               variant="outlined"
@@ -142,8 +146,6 @@ const SubmitFeedback = () => {
               margin="normal"
               onChange={handleChange('classCode')}
             />
-          </Grid>
-          <Grid item container xs={12} justify="center" alignItems="center">
             <FormControl required style={{ minWidth: 320, marginBottom: 30 }} className={classes.formControl}>
               <InputLabel htmlFor="age-native-required">Tutor</InputLabel>
               <Select
@@ -187,8 +189,6 @@ const SubmitFeedback = () => {
                 }}
               />
             </MuiPickersUtilsProvider>
-          </Grid>
-          <Grid item container xs={12} justify="center">
             <TextField
               required
               variant="outlined"
@@ -220,7 +220,7 @@ const SubmitFeedback = () => {
             />
           </Grid>
           <Grid item container xs={12} justify="center">
-            <FormControl style={{ width: 320, border: errors.helped ? "2px solid red" : null, padding: 5}} component="fieldset" className={classes.formControl}>
+            <FormControl style={{ width: 320, border: errors.helped ? "2px solid red" : null, padding: 5 }} component="fieldset" className={classes.formControl}>
               <FormLabel component="legend">Did the session help you?</FormLabel>
               <FormHelperText><br />It didn't! I need to spend more time on it.</FormHelperText>
               <RadioGroup aria-label="helped" name="helped" value={state.helped} onChange={handleChange('helped')}>
@@ -238,10 +238,10 @@ const SubmitFeedback = () => {
               </RadioGroup>
               <FormHelperText>A lot!</FormHelperText>
             </FormControl>
-            <FormControl style={{ width: 320, border: errors.tutorInterest ? "2px solid red" : null, padding: 5}} component="fieldset" className={classes.formControl}>
+            <FormControl style={{ width: 320, border: errors.tutorInterest ? "2px solid red" : null, padding: 5 }} component="fieldset" className={classes.formControl}>
               <FormLabel component="legend">Do you feel the tutor was genuinely interested in helping you?</FormLabel>
               <FormHelperText><br />No!</FormHelperText>
-              <RadioGroup aria-label="helped" name="helped" value={state.tutorInterest} onChange={handleChange('tutorInterest')}>
+              <RadioGroup aria-label="tutorInterest" name="tutorInterest" value={state.tutorInterest} onChange={handleChange('tutorInterest')}>
                 {
                   ['1', '2', '3', '4', '5'].map((num, i) => {
                     return <FormControlLabel
@@ -256,6 +256,93 @@ const SubmitFeedback = () => {
               </RadioGroup>
               <FormHelperText>The tutor was great!</FormHelperText>
             </FormControl>
+            <FormControl style={{ width: 320, border: errors.continueTopic ? "2px solid red" : null, padding: 5 }} component="fieldset" className={classes.formControl}>
+              <FormLabel component="legend">Do you feel that you can pick up from where the session left off and continue to gain more understanding of the topic?</FormLabel>
+              <FormHelperText><br />Nope</FormHelperText>
+              <RadioGroup aria-label="continueTopic" name="continueTopic" value={state.continueTopic} onChange={handleChange('continueTopic')}>
+                {
+                  ['1', '2', '3', '4', '5'].map((num, i) => {
+                    return <FormControlLabel
+                      key={i}
+                      value={num}
+                      control={<Radio color="primary" />}
+                      label={num}
+                      labelPlacement="end"
+                    />
+                  })
+                }
+              </RadioGroup>
+              <FormHelperText>Definitely!</FormHelperText>
+            </FormControl>
+            <FormControl style={{ width: 400, border: errors.studyHours ? "2px solid red" : null, padding: 5 }} component="fieldset" className={classes.formControl}>
+              <FormLabel component="legend">Are you spending the minimal recommended time studying, practicing, coding, etc. outside of going to class? 20+ hrs per week for 6 month boot camps / 40+ hrs per week for 3 month boot camps?</FormLabel>
+              <RadioGroup aria-label="studyHours" name="studyHours" value={state.studyHours} onChange={handleChange('studyHours')}>
+                <FormControlLabel
+                  value="Yes, I spend that much time or more each week!"
+                  control={<Radio color="primary" />}
+                  label="Yes, I spend that much time or more each week!"
+                  labelPlacement="end"
+                />
+                <FormControlLabel
+                  value="No, I don't have that much time to study, practice, code, etc. every week outside of going to class."
+                  control={<Radio color="primary" />}
+                  label="No, I don't have that much time to study, practice, code, etc. every week outside of going to class."
+                  labelPlacement="end"
+                />
+                <FormControlLabel
+                  value="I didn't know that those are the recommended minimal hours outside of class hours."
+                  control={<Radio color="primary" />}
+                  label="I didn't know that those are the recommended minimal hours outside of class hours."
+                  labelPlacement="end"
+                />
+                <FormControlLabel
+                  value={""}
+                  control={<Radio color="primary" />}
+                  label={
+                    <TextField
+                      id="standard-bare"
+                      label="Other"
+                      defaultValue={""}
+                      margin="normal"
+                      onChange={handleChange('studyHours')}
+                    />
+                  }
+                  labelPlacement="end"
+                />
+              </RadioGroup>
+            </FormControl>
+            <Grid item container xs={12} justify="space-around" alignItems="center">
+              <TextField
+                required
+                variant="outlined"
+                multiline
+                rowsMax={5}
+                inputProps={{ maxLength: 600 }}
+                error={errors.comments}
+                helperText={messages.comments}
+                style={{ minWidth: 320 }}
+                name="comments"
+                type="text"
+                className={classes.textField}
+                label="Comments"
+                margin="normal"
+                onChange={handleChange('comments')}
+              />
+              <TextField
+                variant="outlined"
+                multiline
+                rowsMax={5}
+                helperText="Your tutor will not see these comments"
+                inputProps={{ maxLength: 600 }}
+                style={{ minWidth: 320 }}
+                name="privateComments"
+                type="text"
+                className={classes.textField}
+                label="Comments (Private)"
+                margin="normal"
+                onChange={handleChange('privateComments')}
+              />
+            </Grid>
           </Grid>
         </Grid>
         <Grid item container xs={12} justify="center">

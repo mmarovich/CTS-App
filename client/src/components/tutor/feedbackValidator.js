@@ -2,12 +2,14 @@ const feedbackValidator = submission => {
   const errors = {
     firstName: false, lastName: false, email: false,
     classCode: false, tutor: false, length: false,
-    topics: false, helped: false, tutorInterest: false
+    topics: false, helped: false, tutorInterest: false,
+    continueTopic: false, studyHours: false
   }
   const messages = {
     firstName: '', lastName: '', email: '',
     classCode: '', tutor: '', length: '',
-    topics: '', helped: '', tutorInterest: ''
+    topics: '', helped: '', tutorInterest: '',
+    continueTopic: '', studyHours: ''
   }
   
   if (submission.firstName === "") {
@@ -59,6 +61,19 @@ const feedbackValidator = submission => {
 
   if (submission.tutorInterest === "") {
     errors.tutorInterest = true
+  }
+
+  if (submission.continueTopic === "") {
+    errors.continueTopic = true
+  }
+
+  if (submission.studyHours === "") {
+    errors.studyHours = true
+  }
+
+  if (submission.comments === "") {
+    errors.comments = true
+    messages.comments = "Did your session go well?"
   }
 
   return {
