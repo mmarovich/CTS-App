@@ -19,19 +19,19 @@ import {
 
 
 const SubmitFeedback = () => {
-  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [sessionDate, setSessionDate] = useState(new Date());
   const [tutors, setTutors] = useState([])
   const [errors, setErrors] = useState({
     firstName: false, lastName: false, email: false,
     classCode: false, tutor: false, length: false,
     topics: false, helped: false, tutorInterest: false,
-    continueTopic: false, studyHours: false, comments: false
+    continueTopic: false, studyHours: false, officeHours: false,
+    comments: false
   })
   const [messages, setMessages] = useState({
     firstName: '', lastName: '', email: '',
     classCode: '', tutor: '', length: '',
-    topics: '', helped: '', tutorInterest: '',
-    continueTopic: '', studyHours: '', comments: ''
+    topics: '', comments: ''
   })
   const [state, setState] = useState({
     firstName: "",
@@ -45,13 +45,13 @@ const SubmitFeedback = () => {
     tutorInterest: "",
     continueTopic: "",
     studyHours: "",
+    officeHours: "",
     comments: "",
     privateComments: ""
   });
   const classes = useStyles();
 
   const handleChange = name => event => {
-    console.log(event.target.value)
     setState({
       ...state,
       [name]: event.target.value,
@@ -59,7 +59,7 @@ const SubmitFeedback = () => {
   };
 
   const handleDateChange = date => {
-    setSelectedDate(date);
+    setSessionDate(date);
   };
 
   const getTutors = async () => {
@@ -69,23 +69,34 @@ const SubmitFeedback = () => {
   }
 
   // useEffect(() => {
-  //   console.log(tutors, selectedDate)
-  // }, [tutors, selectedDate])
+  //   console.log(tutors, sessionDate)
+  // }, [tutors, sessionDate])
 
   useEffect(() => {
     getTutors()
   }, [])
 
-  useEffect(() => {
-    console.log(state)
-  }, [state])
+  // useEffect(() => {
+  //   console.log(state)
+  // }, [state])
 
-  const submitFeedback = (e) => {
+  const submitFeedback = async (e) => {
     e.preventDefault();
     const validations = feedbackValidator(state)
 
     setErrors(validations.errors)
     setMessages(validations.messages)
+
+    var noErrors = Object.keys(validations.errors).every(function(k){ return validations.errors[k] === false });
+    
+    if (noErrors) {
+      console.log(sessionDate)
+      const response = await Axios.post("api/admin/feedback", {
+        ...state,
+        sessionDate
+      })
+      console.log(response.data)
+    }
   }
 
   return (
@@ -163,7 +174,7 @@ const SubmitFeedback = () => {
                 {
                   tutors.map((tutor, i) => {
                     return <option
-                      value={`${tutor.firstName} ${tutor.lastName}`}
+                      value={tutor.id}
                       key={i}
                     >{tutor.firstName} {tutor.lastName}</option>
                   })
@@ -182,7 +193,7 @@ const SubmitFeedback = () => {
                 id="date-picker-dialog"
                 label="Session Date"
                 format="MM/dd/yyyy"
-                value={selectedDate}
+                value={sessionDate}
                 onChange={handleDateChange}
                 KeyboardButtonProps={{
                   'aria-label': 'change date',
@@ -305,6 +316,43 @@ const SubmitFeedback = () => {
                       defaultValue={""}
                       margin="normal"
                       onChange={handleChange('studyHours')}
+                    />
+                  }
+                  labelPlacement="end"
+                />
+              </RadioGroup>
+            </FormControl>
+            <FormControl style={{ width: 400, border: errors.officeHours ? "2px solid red" : null, padding: 5 }} component="fieldset" className={classes.formControl}>
+              <FormLabel component="legend">Regular attendance at Office Hours is mandatory for any student that is assigned a tutor in Central Support. Tutoring is not a replacement for working with your TA's during Office Hours.</FormLabel>
+              <RadioGroup aria-label="officeHours" name="officeHours" value={state.officeHours} onChange={handleChange('officeHours')}>
+                <FormControlLabel
+                  value="I attend Office Hours consistently."
+                  control={<Radio color="primary" />}
+                  label="I attend Office Hours consistently."
+                  labelPlacement="end"
+                />
+                <FormControlLabel
+                  value="I will start attending Office Hours more consistently. I did not realize it is mandatory."
+                  control={<Radio color="primary" />}
+                  label="I will start attending Office Hours more consistently. I did not realize it is mandatory."
+                  labelPlacement="end"
+                />
+                <FormControlLabel
+                  value="I am unable to attend Office Hours due to outside obligations, etc."
+                  control={<Radio color="primary" />}
+                  label="I am unable to attend Office Hours due to outside obligations, etc."
+                  labelPlacement="end"
+                />
+                <FormControlLabel
+                  value={""}
+                  control={<Radio color="primary" />}
+                  label={
+                    <TextField
+                      id="standard-bare"
+                      label="Other"
+                      defaultValue={""}
+                      margin="normal"
+                      onChange={handleChange('officeHours')}
                     />
                   }
                   labelPlacement="end"

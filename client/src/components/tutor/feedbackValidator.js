@@ -3,7 +3,7 @@ const feedbackValidator = submission => {
     firstName: false, lastName: false, email: false,
     classCode: false, tutor: false, length: false,
     topics: false, helped: false, tutorInterest: false,
-    continueTopic: false, studyHours: false
+    continueTopic: false, studyHours: false, officeHours: false
   }
   const messages = {
     firstName: '', lastName: '', email: '',
@@ -69,6 +69,10 @@ const feedbackValidator = submission => {
 
   if (submission.studyHours === "") {
     errors.studyHours = true
+  }
+
+  if (submission.officeHours === "") {
+    errors.officeHours = true
   }
 
   if (submission.comments === "") {

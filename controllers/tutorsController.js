@@ -23,7 +23,11 @@ module.exports = {
     }).sort({firstName: 1})
 
     const tutorNames = tutors.map((tutor) => {
-      return {firstName: tutor.firstName, lastName: tutor.lastName}
+      return {
+        firstName: tutor.firstName, 
+        lastName: tutor.lastName,
+        id: tutor.id
+      }
     })
 
     res.send(tutorNames)

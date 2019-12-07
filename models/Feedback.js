@@ -10,6 +10,10 @@ const FeedbackSchema = new Schema({
     type: String,
     required: true
   },
+  email: {
+    type: String,
+    required: true
+  },
   classCode: {
     type: String,
     required: true
@@ -18,19 +22,19 @@ const FeedbackSchema = new Schema({
     type: mongoose.Schema.Types.ObjectId, 
     ref: 'User'
   },
+  length: {
+    type: String,
+    required: true
+  },
   sessionDate: {
     type: Date,
     required: true
   },
-  sessionLength: {
-    type: String,
-    required: true
-  },
-  topicsCovered: {
+  topics: {
     type: [String],
     required: true
   },
-  sessionHelpful: {
+  helped: {
     type: Number,
     required: true
   },
@@ -38,7 +42,7 @@ const FeedbackSchema = new Schema({
     type: Number,
     required: true
   },
-  continuedUnderstanding: {
+  continueTopic: {
     type: Number,
     required: true
   },
@@ -53,6 +57,9 @@ const FeedbackSchema = new Schema({
   comments: {
     type: String,
     required: true
+  },
+  privateComments: {
+    type: String
   }
 })
 

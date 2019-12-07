@@ -2,6 +2,7 @@ const router = require("express").Router();
 const tutorsController = require("../../../controllers/tutorsController");
 const statusController = require("../../../controllers/statusController");
 const queueController = require("../../../controllers/queueController");
+const feedbackController = require("../../../controllers/feedbackController");
 
 router.route("/tutors")
   .get(tutorsController.findAll)
@@ -31,5 +32,8 @@ router.route("/level")
 
 router.route("/assignTutor")
   .put(queueController.assignTutor);
+
+router.route("/feedback")
+  .post(feedbackController.new)
 
 module.exports = router;
